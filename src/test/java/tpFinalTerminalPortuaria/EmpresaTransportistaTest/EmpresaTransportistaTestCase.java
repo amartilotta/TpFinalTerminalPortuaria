@@ -1,14 +1,14 @@
 package tpFinalTerminalPortuaria.EmpresaTransportistaTest;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
 
+import org.junit.Before;
+import org.junit.Test;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
 import tpFinalTerminalPortuaria.EmpresaTransportista.EmpresaTransportista;
@@ -20,7 +20,7 @@ public class EmpresaTransportistaTestCase {
 	private List<Chofer> choferes;
 	private List<Camion> camiones;
 	
-	@BeforeEach
+	@Before
 	public void setUp() {
 		choferes = new ArrayList<Chofer>();
 		camiones = new ArrayList<Camion>();
