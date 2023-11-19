@@ -10,7 +10,7 @@ public class Buque {
 	
 	public Buque(String nombre) {
 		this.nombre = nombre;
-		this.fase = new FaseOutbound();//FASE INICIAL
+		this.fase = new FaseOutbound(this);//FASE INICIAL
 		this.ubicacion = new Ubicacion();
 	}
 	
@@ -37,7 +37,7 @@ public class Buque {
 	
 	//METODOS:
 	public void actualizarFase(Terminal terminal) {
-		this.getFase().actualizar(this, terminal);
+		this.getFase().actualizar(terminal);
 	}
 	 
 }
