@@ -2,11 +2,15 @@ package tpFinalTerminalPortuaria.Buque;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FaseArrived implements Fase{
-
+	private Buque buque;
+	
+	public FaseArrived(Buque buque) {
+		this.buque = buque;
+	}
+	
 	@Override
-	public void actualizar(Buque buque, Terminal terminal) {
-		// TODO Auto-generated method stub
-		
+	public void actualizar(Terminal terminal) {
+
 	}
 
 
