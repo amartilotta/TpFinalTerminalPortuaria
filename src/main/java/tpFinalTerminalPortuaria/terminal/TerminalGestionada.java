@@ -1,6 +1,5 @@
 package tpFinalTerminalPortuaria.terminal;
 
-public class TerminalGestionada {
-	private String nombre;
-	private String apellido;
+public class TerminalGestionada extends Terminal{
+
 }
