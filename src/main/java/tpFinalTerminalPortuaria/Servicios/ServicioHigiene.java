@@ -22,10 +22,12 @@ public class ServicioHigiene extends Servicio{
 	
 	@Override
 	public Double precioFinal(Container container) {
-		Double volumen = container.getAncho() * container.getAltura() * container.getLargo();
-		Double precioFinal = this.getPrecioFijo();//PRECIO POR VOLUMEN > 70 METROS CUBICOS
-		if(volumen < 70) {
+		Double precioFinal = 0d;
+		
+		if(container.volumen() < 70) {
 			precioFinal = this.getPrecioPorMinimoVol();
+		}else {
+			precioFinal = this.getPrecioFijo();//PRECIO POR VOLUMEN > 70 METROS CUBICOS
 		}
 		
 		return precioFinal;

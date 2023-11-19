@@ -1,4 +1,4 @@
-package tpFinalTerminalPortuaria.EmpresaTransportistaTest;
+package tpFinalTerminalPortuaria.EmpresaTransportista;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +18,12 @@ class CamionTestCase {
 	@Test
 	void verificoQueElCamionTienePatente() {
 		assertFalse(camion.getPatente().isEmpty());
+	}
+	
+	@Test
+	void cambioLaPatenteYVerificoQueElCambioFueExitoso() {
+		camion.setPatente("32A");
+		assertEquals(camion.getPatente(), "32A");
 	}
 
 }

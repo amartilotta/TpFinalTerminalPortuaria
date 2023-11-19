@@ -6,13 +6,11 @@ import tpFinalTerminalPortuaria.Container.Container;
 public class ServicioElectricidad extends Servicio{
 	private LocalDateTime fechaYHoraInicio;
 	private LocalDateTime fechaYHoraFin;
-	private Float consumoDelReefer;
 	
-	public ServicioElectricidad(Double precio, LocalDateTime fechaYHoraInicio, LocalDateTime fechaYHoraFin, Float consumo) {
+	public ServicioElectricidad(Double precio, LocalDateTime fechaYHoraInicio, LocalDateTime fechaYHoraFin) {
 		super(precio);//PRECIO FIJO POR KW/HORA CONSUMIDO
 		this.fechaYHoraInicio = fechaYHoraInicio;
 		this.fechaYHoraFin    = fechaYHoraFin;
-		this.consumoDelReefer = consumo;
 	}
 
 	//SETTER:
@@ -22,9 +20,7 @@ public class ServicioElectricidad extends Servicio{
 	public void setFechaYHoraFin(LocalDateTime fyHFin) {
 		this.fechaYHoraFin = fyHFin;
 	}
-	public void setConsumoDeReefer(Float consumo) {
-		this.consumoDelReefer = consumo;
-	}
+
 	
 	//GETTER:
 	public LocalDateTime getFechaYHoraInicio() {
@@ -33,17 +29,18 @@ public class ServicioElectricidad extends Servicio{
 	public LocalDateTime getFechaYHoraFin() {
 		return this.fechaYHoraFin;
 	}
-	public Float getConsumoDelReefer() {
-		return this.consumoDelReefer;
-	}
-	
+
 	@Override
 	public Double precioFinal(Container container) {
-		Duration diferenciaEnHoras = Duration.between(this.getFechaYHoraInicio(), this.getFechaYHoraFin());
-		Double cantHorasConsumidas = diferenciaEnHoras.toMillis() / 3600000d;
-		Double kwConsumidos = cantHorasConsumidas * this.getConsumoDelReefer(); //indica los kw consumidos por hora
-		return kwConsumidos * this.getPrecioFijo();
+		return this.totalKWConsumidos(container) * this.getPrecioFijo();
 	}
 	
+	
+	//METODOS AUX. --consultar con agus. consumo del refeer lo ponemos en el tipo?
+	public Double totalKWConsumidos(Container container) {
+		Duration diferenciaDeTiempo = Duration.between(this.getFechaYHoraInicio(), this.getFechaYHoraFin());
+		Double diferenciaEnHoras = diferenciaDeTiempo.toMillis() / 3600000d;
+		return diferenciaEnHoras * container.getConsumoKwHr(); //indica los kw consumidos por hora
+	}
 
 }
