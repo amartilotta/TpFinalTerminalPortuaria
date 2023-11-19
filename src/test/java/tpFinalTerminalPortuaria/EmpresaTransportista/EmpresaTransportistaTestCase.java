@@ -1,4 +1,4 @@
-package tpFinalTerminalPortuaria.EmpresaTransportistaTest;
+package tpFinalTerminalPortuaria.EmpresaTransportista;
 
 import static org.junit.Assert.assertEquals;
 

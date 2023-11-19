@@ -1,4 +1,4 @@
-package tpFinalTerminalPortuaria.EmpresaTransportistaTest;
+package tpFinalTerminalPortuaria.EmpresaTransportista;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -14,14 +14,19 @@ class ChoferTestCase {
 	 
 	@BeforeEach
 	void setUp() throws Exception {
-		chofer = new Chofer("Valentina", "Reigada", "22334");
+		chofer = new Chofer("Juana", "Viale", "22334");
 	}
 
 	@Test
 	void validoQueElChoferTieneSusDatosPersonalesCargados() {
-		assertEquals(chofer.getApellido(), "Reigada");
-		assertEquals(chofer.getNombre(), "Valentina");
+		assertEquals(chofer.getApellido(), "Viale");
+		assertEquals(chofer.getNombre(), "Juana");
 		assertEquals(chofer.getDNI(), "22334");
 	}
 
+	@Test
+	void cambioApellidoPor_Perez_YVerificoElCambio() {
+		chofer.setApellido("Perez");
+		assertEquals(chofer.getApellido(), "Perez");
+	}
 }
