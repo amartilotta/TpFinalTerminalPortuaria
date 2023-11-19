@@ -1,5 +1,5 @@
 package tpFinalTerminalPortuaria.terminal;
 
-public class TerminalGestionada {
+public class TerminalGestionada extends Terminal{
 
 }

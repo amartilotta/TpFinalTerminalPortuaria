@@ -16,6 +16,7 @@ public abstract class Orden {
 	private Viaje viaje;
 	private Container container;
 	private List<Servicio> servicios;
+	private Boolean estaPendiente;
 	
 	public Orden(Viaje viaje, Container container, Cliente cliente, Chofer chofer, Camion camion, List<Servicio> servicios) {
 		this.viaje     = viaje;
@@ -24,6 +25,7 @@ public abstract class Orden {
 		this.chofer    = chofer;
 		this.camion    = camion;
 		this.servicios = servicios;
+		this.estaPendiente = true;
 	}
 	
 	//SETTER:
@@ -45,6 +47,9 @@ public abstract class Orden {
 	public void agregarServicio(Servicio servicio) {
 		this.servicios.add(servicio);
 	}
+	public void setEstaPendiente(Boolean pendiente) {
+		this.estaPendiente = pendiente;
+	}
 	
 	//GETTER:
 	public Viaje getViaje() {
@@ -65,7 +70,9 @@ public abstract class Orden {
 	public List<Servicio> getServicios(){
 		return this.servicios;
 	}
-	
+	public Boolean estaPendiente() {//CUANDO LA ORDEN FUE PROCESADA POR LA TERMINAL, SE SETEA A PENDIENTE:FALSE.
+		return this.estaPendiente;
+	}
 	
 	//METODOS:
 	public void eliminarServicio(Servicio servicio) {
