@@ -5,7 +5,7 @@ public class FaseDeparting implements Fase{
 
 	@Override
 	public void actualizar(Buque buque, Terminal terminal) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
