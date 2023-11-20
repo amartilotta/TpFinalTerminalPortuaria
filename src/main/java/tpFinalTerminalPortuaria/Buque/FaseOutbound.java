@@ -10,7 +10,11 @@ public class FaseOutbound implements Fase{
 	
 	@Override
 	public void actualizar(Terminal terminal) {
-		
+		if(this.buque.ubicacionActual() < 50) {
+			Fase faseNueva = new FaseInbound(this.buque);
+			this.buque.setFase(faseNueva);
+			terminal.procesarOrdenSegunBuque(this.buque);
+		}
 		
 	}
 

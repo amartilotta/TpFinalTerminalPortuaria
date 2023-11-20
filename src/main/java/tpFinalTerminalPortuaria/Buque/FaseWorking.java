@@ -10,7 +10,10 @@ public class FaseWorking implements Fase{
 	
 	@Override
 	public void actualizar(Terminal terminal) {
-		
+		if(!this.buque.estaConTrabajoEnCurso()) {
+			Fase faseNueva = new FaseDeparting(this.buque);
+			this.buque.setFase(faseNueva);
+		}
 		
 	}
 

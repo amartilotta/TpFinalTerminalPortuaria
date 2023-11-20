@@ -44,9 +44,6 @@ public abstract class Orden {
 	public void setCamion(Camion camion) {
 		this.camion = camion;
 	}
-	public void agregarServicio(Servicio servicio) {
-		this.servicios.add(servicio);
-	}
 	public void setEstaPendiente(Boolean pendiente) {
 		this.estaPendiente = pendiente;
 	}
@@ -75,6 +72,10 @@ public abstract class Orden {
 	}
 	
 	//METODOS:
+	public void agregarServicio(Servicio servicio) {
+		this.servicios.add(servicio);
+	}
+	
 	public void eliminarServicio(Servicio servicio) {
 		if(this.servicios.contains(servicio)) {
 			int index = this.servicios.indexOf(servicio);
