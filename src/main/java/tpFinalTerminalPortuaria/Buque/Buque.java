@@ -1,5 +1,8 @@
 package tpFinalTerminalPortuaria.Buque;
+import java.util.ArrayList;
+import java.util.List;
 
+import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
@@ -8,12 +11,14 @@ public class Buque {
 	private Fase fase;
 	private Ubicacion ubicacion;
 	private Boolean estaConTrabajoEnCurso;
+	private List<Container> containeres;
 	
 	public Buque(String nombre) {
 		this.nombre = nombre;
 		this.fase = new FaseOutbound(this);//FASE INICIAL
 		this.ubicacion = new Ubicacion();
 		this.estaConTrabajoEnCurso = false;
+		this.containeres = new ArrayList<Container>();
 	}
 	
 	//SETTER:
@@ -28,7 +33,19 @@ public class Buque {
 	}
 	
 	public Ubicacion ubicacionActual() {
+		
 		return null;//ubicacion.actualizarUbicacion();
+	}
+	
+	public void agregarContainer(Container container) {
+		this.containeres.add(container);
+	}
+	
+	public void eliminarContainer(Container container) {
+		if(this.containeres.contains(container)) {
+			int index = this.containeres.indexOf(container);
+			this.containeres.remove(index);
+		}
 	}
 	
 	//GETTER:
@@ -40,6 +57,9 @@ public class Buque {
 	}
 	public Boolean estaConTrabajoEnCurso() {
 		return this.estaConTrabajoEnCurso;
+	}
+	public List<Container> getContainer(){
+		return this.containeres;
 	}
 	
 	//METODOS:
@@ -55,6 +75,12 @@ public class Buque {
 	public void depart(Terminal terminal) {
 		this.setEstaConTrabajoEnCurso(false);
 		this.actualizarFase(terminal);
+	}
+
+	public int distanciaA(Terminal terminal) {
+		Ubicacion ubicacionActual = this.ubicacionActual();
+		int distancia = ubicacionActual.distanciaA(Terminal.getUbicacion());
+		return distancia;
 	}
 	 
 }

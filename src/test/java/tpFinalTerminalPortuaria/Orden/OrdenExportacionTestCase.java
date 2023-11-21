@@ -1,13 +1,16 @@
 package tpFinalTerminalPortuaria.Orden;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.ArrayList;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
@@ -17,7 +20,7 @@ import tpFinalTerminalPortuaria.Servicios.Servicio;
 import tpFinalTerminalPortuaria.Servicios.ServicioHigiene;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 
-class OrdenExportacionTestCase {
+public class OrdenExportacionTestCase {
 	private OrdenExportacion orden;
 	private Viaje viaje;
 	private Shipper cliente;
@@ -27,19 +30,20 @@ class OrdenExportacionTestCase {
 	private Container container;
 	private ServicioHigiene servicioHigiene;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		viaje     = mock(Viaje.class);
 		cliente   = mock(Shipper.class);
 		chofer    = mock(Chofer.class);
 		camion    = mock(Camion.class);
+		container = mock(Container.class);
 		servicios = new ArrayList<Servicio>();
 		servicioHigiene = mock(ServicioHigiene.class);
-		orden	  = new OrdenExportacion(viaje, container, cliente, chofer, camion, servicios);
+		orden	  = new OrdenExportacion(viaje, container, chofer, camion, servicios, cliente);
 	}
 	
 	@Test
-	void cuandoSeCreaUnaOrdenTiene_Viaje_Cliente_chofer_camion_servicios_orden() {
+	public void cuandoSeCreaUnaOrdenTiene_Viaje_Cliente_chofer_camion_servicios_orden() {
 		assertEquals(orden.getCamion(), camion);
 		assertEquals(orden.getChofer(), chofer);
 		assertEquals(orden.getCliente(), cliente);
@@ -48,28 +52,28 @@ class OrdenExportacionTestCase {
 	}
 	
 	@Test
-	void cuandoSeCreaUnaOrdenNoTieneServiciosCargados() {
+	public void cuandoSeCreaUnaOrdenNoTieneServiciosCargados() {
 		assertEquals(orden.getServicios().size(), 0);
 	}
 	
 	@Test
-	void cuandoSeCreaUnaOrden_EstaPendienteAProcesar() {
+	public void cuandoSeCreaUnaOrden_EstaPendienteAProcesar() {
 		assertTrue(orden.estaPendiente());
 	}
 	
 	@Test
-	void agregoServicioHigieneALaOrdenYVerificoQueLaCantidadDeServiciosEs1() {
+	public void agregoServicioHigieneALaOrdenYVerificoQueLaCantidadDeServiciosEs1() {
 		orden.agregarServicio(servicioHigiene);
 		assertEquals(orden.getServicios().size(), 1);	
 	}
 	
 	@Test
-	void agregoServicioDeHigieneConUnValorDe90ALaOrden_Y_VerificoQueElPrecioTotalDeServiciosEs90d() {
+	public void agregoServicioDeHigieneConUnValorDe90ALaOrden_Y_VerificoQueElPrecioTotalDeServiciosEs90d() {
 		when(container.volumen()).thenReturn(50d);
 		when(servicioHigiene.getPrecioPorMinimoVol()).thenReturn(90d);
 		when(servicioHigiene.precioFinal(container)).thenReturn(90d);
 		orden.agregarServicio(servicioHigiene);
-		assertEquals(orden.precioTotalServicios(), 90d);
+		assertTrue(orden.precioTotalServicios() == 90d);
 	}
 	
 

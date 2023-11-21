@@ -1,45 +1,45 @@
 package tpFinalTerminalPortuaria.Servicios;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import tpFinalTerminalPortuaria.Container.Container;
 
-class ServicioHigieneTestCase {
+public class ServicioHigieneTestCase {
 	private ServicioHigiene servicio;
 	private Container container;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		container = mock(Container.class);
 		servicio  = new ServicioHigiene(1200d, 100d);
 	}
 
 	@Test
-	void cuandoSeCreaUnServicioHigiene_TieneUnPrecioFijoYUnPrecioPorMinimoVolumen() {
+	public void cuandoSeCreaUnServicioHigiene_TieneUnPrecioFijoYUnPrecioPorMinimoVolumen() {
 		assertTrue(servicio.getPrecioFijo() == 1200d);
 		assertTrue(servicio.getPrecioPorMinimoVol() == 100d);
 	}
 
 	@Test
-	void cambioElValorDelPrecioFijo_Y_VerificoElCambio() {
+	public void cambioElValorDelPrecioFijo_Y_VerificoElCambio() {
 		servicio.setPrecioFijo(100d);
-		assertEquals(servicio.getPrecioFijo(), 100d);
+		assertTrue(servicio.getPrecioFijo() == 100d);
 	}
 	
 	@Test
-	void cambioElValorDelMinimoVolumenYVerifico() {
+	public void cambioElValorDelMinimoVolumenYVerifico() {
 		servicio.setPrecioPorMinimoVol(80d);
-		assertEquals(servicio.getPrecioPorMinimoVol(), 80d);
+		assertTrue(servicio.getPrecioPorMinimoVol()== 80d);
 	}
 
 	@Test
-	void verificoQueElPrecioFinalDelServicioEs_100d_PorQueElContainerTieneUnVolumenMenorA70() {
+	public void verificoQueElPrecioFinalDelServicioEs_100d_PorQueElContainerTieneUnVolumenMenorA70() {
 		when(container.volumen()).thenReturn(60d);
-		assertEquals(servicio.precioFinal(container), 100d);
+		assertTrue(servicio.precioFinal(container) == 100d);
 	} 
 }
