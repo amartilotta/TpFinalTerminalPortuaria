@@ -1,20 +1,18 @@
 package tpFinalTerminalPortuaria.Buque;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
-public class FaseWorking implements Fase{
-	private Buque buque;
+public class FaseWorking extends Fase{
 	
 	public FaseWorking(Buque buque) {
-		this.buque = buque;
+		super(buque);
 	}
 	
 	@Override
 	public void actualizar(Terminal terminal) {
-		if(!this.buque.estaConTrabajoEnCurso()) {
-			Fase faseNueva = new FaseDeparting(this.buque);
-			this.buque.setFase(faseNueva);
+		if(!this.getBuque().estaConTrabajoEnCurso()) {
+			Fase faseNueva = new FaseDeparting(this.getBuque());
+			this.getBuque().setFase(faseNueva);
 		}
-		
 	}
 
 

@@ -10,9 +10,18 @@ import tpFinalTerminalPortuaria.Servicios.Servicio;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 
 public class OrdenExportacion extends Orden{
+	private Shipper shipper;
+	
+	public OrdenExportacion(Viaje viaje, Container container, Chofer chofer, Camion camion, List<Servicio> servicios, Shipper cliente) {
+		super(viaje, container, chofer, camion, servicios);
+		this.shipper = cliente;
+	}
 
-	public OrdenExportacion(Viaje viaje, Container container, Shipper cliente, Chofer chofer, Camion camion, List<Servicio> servicios) {
-		super(viaje, container, cliente, chofer, camion, servicios);
+	public Shipper getCliente() {
+		return this.shipper;
+	}
+	public void setCliente(Shipper cliente) {
+		this.shipper = cliente;
 	}
 
 }

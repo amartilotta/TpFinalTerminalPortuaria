@@ -5,12 +5,10 @@ import java.util.List;
 import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
-import tpFinalTerminalPortuaria.Persona.Cliente;
 import tpFinalTerminalPortuaria.Servicios.Servicio;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 
 public abstract class Orden {
-	private Cliente cliente;
 	private Camion camion;
 	private Chofer chofer;
 	private Viaje viaje;
@@ -18,10 +16,9 @@ public abstract class Orden {
 	private List<Servicio> servicios;
 	private Boolean estaPendiente;
 	
-	public Orden(Viaje viaje, Container container, Cliente cliente, Chofer chofer, Camion camion, List<Servicio> servicios) {
+	public Orden(Viaje viaje, Container container, Chofer chofer, Camion camion, List<Servicio> servicios) {
 		this.viaje     = viaje;
 		this.container = container;
-		this.cliente   = cliente;
 		this.chofer    = chofer;
 		this.camion    = camion;
 		this.servicios = servicios;
@@ -35,9 +32,7 @@ public abstract class Orden {
 	public void setContainer(Container container) {
 		this.container = container;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+
 	public void setChofer(Chofer chofer) {
 		this.chofer = chofer;
 	}
@@ -54,9 +49,6 @@ public abstract class Orden {
 	}
 	public Container getContainer() {
 		return this.container;
-	}
-	public Cliente getCliente() {
-		return this.cliente;
 	}
 	public Chofer getChofer() {
 		return this.chofer;

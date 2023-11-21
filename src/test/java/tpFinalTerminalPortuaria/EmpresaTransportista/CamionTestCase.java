@@ -1,27 +1,27 @@
 package tpFinalTerminalPortuaria.EmpresaTransportista;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
+import org.junit.Before;
+import org.junit.Test;
 
-class CamionTestCase {
+public class CamionTestCase {
 	private Camion camion;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		camion = new Camion("73C");
 	}
 
 	@Test
-	void verificoQueElCamionTienePatente() {
+	public void verificoQueElCamionTienePatente() {
 		assertFalse(camion.getPatente().isEmpty());
 	}
 	
 	@Test
-	void cambioLaPatenteYVerificoQueElCambioFueExitoso() {
+	public void cambioLaPatenteYVerificoQueElCambioFueExitoso() {
 		camion.setPatente("32A");
 		assertEquals(camion.getPatente(), "32A");
 	}

@@ -1,36 +1,37 @@
 package tpFinalTerminalPortuaria.Servicios;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import tpFinalTerminalPortuaria.Container.Container;
 
-class ServicioPesajeTestCase {
+public class ServicioPesajeTestCase {
 	private ServicioPesaje servicio;
 	private Container container;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		container = mock(Container.class);
 		servicio  = new ServicioPesaje(1200d);
 	}
 
 	@Test
-	void cuandoSeCreaUnServicioPesajeTieneUnPrecioFijo() {
+	public void cuandoSeCreaUnServicioPesajeTieneUnPrecioFijo() {
 		assertTrue(servicio.getPrecioFijo() == 1200d);
 	}
 
 	@Test
-	void cambioElValorDelPrecioFijoYVerificoElCambio() {
+	public void cambioElValorDelPrecioFijoYVerificoElCambio() {
 		servicio.setPrecioFijo(100d);
-		assertEquals(servicio.getPrecioFijo(), 100d);
+		assertTrue(servicio.getPrecioFijo() == 100d);
 	}
 	
 	@Test 
-	void verificoQueElPrecioFinalDelServicioEsIgualAlPrecioFijo(){
+	public void verificoQueElPrecioFinalDelServicioEsIgualAlPrecioFijo(){
 		assertEquals(servicio.precioFinal(container), servicio.getPrecioFijo());
 	}
 }
