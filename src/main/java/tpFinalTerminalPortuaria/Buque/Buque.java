@@ -77,10 +77,10 @@ public class Buque {
 		this.actualizarFase(terminal);
 	}
 
-	public int distanciaA(Terminal terminal) {
+/*	public int distanciaA(Terminal terminal) {
 		Ubicacion ubicacionActual = this.ubicacionActual();
 		int distancia = ubicacionActual.distanciaA(terminal.getUbicacion());
 		return distancia;
-	}
+	}*/
 	 
 }
