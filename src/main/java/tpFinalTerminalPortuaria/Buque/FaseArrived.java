@@ -1,5 +1,5 @@
 package tpFinalTerminalPortuaria.Buque;
-import tpFinalTerminalPortuaria.terminal.Terminal;
+import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 
 public class FaseArrived extends Fase{
 	
@@ -8,7 +8,7 @@ public class FaseArrived extends Fase{
 	}
 	
 	@Override
-	public void actualizar(Terminal terminal) {
+	public void actualizar(TerminalGestionada terminal) {
 		if(this.getBuque().estaConTrabajoEnCurso()) {
 			FaseWorking faseNueva = new FaseWorking(this.getBuque());
 			this.getBuque().setFase(faseNueva);	

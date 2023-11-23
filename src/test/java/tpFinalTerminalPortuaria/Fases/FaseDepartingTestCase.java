@@ -28,7 +28,7 @@ public class FaseDepartingTestCase {
 	@Test
 	public void verificoQueSiBuqueEstaEnFaseDepartingYAUnaDistanciaMayorA1KMDeTerminal_Entonces_AlPedirQueSeActualicePasaAFaseOutbound() {
 		 // Configurar el mock para que este a una distancia mayor  a 1km de terminal
-        when(buqueMock.distanciaA(terminalMock)).thenReturn(2);
+        when(buqueMock.distanciaA(terminalMock)).thenReturn(2d);
         // Llamó al método actualizar de faseWorking
         faseDeparting.actualizar(terminalMock); 
 
