@@ -9,7 +9,7 @@ public class FaseInbound extends Fase{
 
 	@Override
 	public void actualizar(Terminal terminal) {
-		if (this.getBuque().ubicacionActual() == terminal.getUbicacion()) {
+		if (this.getBuque().distanciaA(terminal) == 0) {
 			Fase fase = new FaseArrived(this.getBuque());
 			this.getBuque().setFase(fase);
 			this.getBuque().setEstaConTrabajoEnCurso(false);

@@ -16,7 +16,7 @@ public class Buque {
 	public Buque(String nombre) {
 		this.nombre = nombre;
 		this.fase = new FaseOutbound(this);//FASE INICIAL
-		this.ubicacion = new Ubicacion();
+		this.ubicacion = new Ubicacion(0, 0);
 		this.estaConTrabajoEnCurso = false;
 		this.containeres = new ArrayList<Container>();
 	}
@@ -34,7 +34,7 @@ public class Buque {
 	
 	public Ubicacion ubicacionActual() {
 		
-		return null;//ubicacion.actualizarUbicacion();
+		return this.ubicacion;//ubicacion.actualizarUbicacion();
 	}
 	
 	public void agregarContainer(Container container) {
@@ -77,10 +77,10 @@ public class Buque {
 		this.actualizarFase(terminal);
 	}
 
-	public int distanciaA(Terminal terminal) {
+/*	public int distanciaA(Terminal terminal) {
 		Ubicacion ubicacionActual = this.ubicacionActual();
-		int distancia = ubicacionActual.distanciaA(Terminal.getUbicacion());
+		int distancia = ubicacionActual.distanciaA(terminal.getUbicacion());
 		return distancia;
-	}
+	}*/
 	 
 }

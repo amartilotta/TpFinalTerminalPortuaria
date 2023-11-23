@@ -18,20 +18,17 @@ public class FaseInboundTestCase {
 	private Buque buqueMock;
 	private FaseInbound faseInbound;
 	private TerminalGestionada terminalMock;
-	private Ubicacion ubicacion;
 	@Before
 	public void setUp() throws Exception {
 		buqueMock 	 = mock(Buque.class);
 		terminalMock = mock(TerminalGestionada.class);
 		faseInbound = new FaseInbound(buqueMock);
-		ubicacion = mock(Ubicacion.class);
 	}
 	
 	@Test
 	public void verificoQueSiBuqueEstaEnLaMismaUbicacionATerminal_EntoncesPasaAFaseArrived() {
 		 // Configurar el mock para que tenga trabajo en curso
-        when(terminalMock).getUbicacion().thenReturn(ubicacion);
-		when(buqueMock.ubicacionActual()).thenReturn(ubicacion);
+		when(buqueMock.distanciaA(terminalMock)).thenReturn(0);
 
         // Llamó al método actualizar de faseInbound
 		faseInbound.actualizar(terminalMock);
