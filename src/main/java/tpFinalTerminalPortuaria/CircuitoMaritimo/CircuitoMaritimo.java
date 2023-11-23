@@ -12,7 +12,7 @@ import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 public class CircuitoMaritimo {
 	
 	private TreeSet<Tramo> tramos;
-	private List<TerminalGestionada> TerminalesPortuarias = new ArrayList<TerminalGestionada>(); //Para que sirve esto?
+	
 	
 	public CircuitoMaritimo(TreeSet<Tramo> tramos) {
         this.tramos = tramos;
