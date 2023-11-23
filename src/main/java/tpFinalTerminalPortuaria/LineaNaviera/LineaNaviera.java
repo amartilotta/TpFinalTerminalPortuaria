@@ -4,13 +4,14 @@ import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
 import tpFinalTerminalPortuaria.Cronograma.Cronograma;
 import tpFinalTerminalPortuaria.terminal.Terminal;
-
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.time.LocalDate;
 
 public class LineaNaviera {
 	
 	private String nombreEmpresa;
-	private Cronograma cronograma;
 	private List<CircuitoMaritimo> circuitos = new ArrayList<CircuitoMaritimo>();
 	private List<Buque> buques = new ArrayList<Buque>();
 	private List<Viaje> viajes = new ArrayList<Viaje>();
@@ -25,8 +26,13 @@ public class LineaNaviera {
 		return 0;
 	}
 	
-	public double buqueMasProximoASalir(Terminal terminalGestionada, Terminal terminal) {
+	public double fechaBuqueMasProximoASalir(Terminal terminalGestionada, Terminal terminal) {
 		return 0;
+	}
+	
+	public Cronograma generarCronogramaViaje(CircuitoMaritimo circuito) {
+		Map<Terminal, LocalDate> informacion = circuito.getTerminalesYFechasSalida();
+		return new Cronograma(informacion);
 	}
 
 }
