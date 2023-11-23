@@ -64,8 +64,8 @@ public class Buque {
 	
 	//METODOS:
 	public void actualizarFase(Terminal terminal) {
-		this.getFase().actualizar(terminal);
-	}
+		this.getFase().actualizar(terminal); 
+	} 
 	
 	public void iniciarTrabajo(Terminal terminal) {//La terminal se comunica con el buque para pasar a fase WORKING
 		this.setEstaConTrabajoEnCurso(true);

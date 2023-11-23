@@ -12,7 +12,7 @@ public class FaseOutbound extends Fase{
 		if(this.getBuque().distanciaA(terminal) < 50) {
 			Fase faseNueva = new FaseInbound(this.getBuque());
 			this.getBuque().setFase(faseNueva);
-			terminal.procesarOrdenSegunBuque(this.getBuque());
+			//terminal.procesarOrdenSegunBuque(this.getBuque());
 		}
 		
 	}

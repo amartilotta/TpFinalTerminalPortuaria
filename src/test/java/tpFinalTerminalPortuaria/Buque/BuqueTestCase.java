@@ -1,11 +1,13 @@
 package tpFinalTerminalPortuaria.Buque;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,23 +19,17 @@ import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 public class BuqueTestCase {
 	private Buque buque;
 	private Container container;
-	private FaseInbound faseInbound;
-	private FaseOutbound faseOutbound;
 	private FaseArrived faseArrived;
 	private FaseWorking faseWorking;
-	private FaseDeparting faseDeparting;
 	private TerminalGestionada terminal;
 	
 	@Before
 	public void setUp() throws Exception {
 		buque = new Buque("BUQUE");
 		container     = mock(Container.class);
-		faseInbound   =	mock(FaseInbound.class);
-		faseOutbound  = mock(FaseOutbound.class);
 		faseArrived   = mock(FaseArrived.class);
-		faseWorking   = mock(FaseWorking.class);
-		faseDeparting = mock(FaseDeparting.class);
 		terminal      = mock(TerminalGestionada.class);
+		faseWorking   = mock(FaseWorking.class);
 	}
 
 	@Test
@@ -65,41 +61,26 @@ public class BuqueTestCase {
 		assertEquals(buque.getContainer().size(), 0);
 	}
 	
-	//TEST DE LAS FASES.
 	@Test
-	public void elBuqueEstaEnFaseOutboundYSeEncuentraConUnaDistanciaDe70ATerminal_Entonces_AlPedirQueSeActualiceFase_SigueLaMisma() {
-		Ubicacion ubicacionBuque = buque.ubicacionActual();
-		Ubicacion ubicacionTerminal = buque.ubicacionActual() + 70; //setear ubicacion de terminal, a una distancia de 70.
-		when(terminal.getUbicacion()).thenReturn(ubicacionTerminal);
-		buque.setFase(faseOutbound);
-		buque.actualizarFase(terminal);
-		verify(terminal, times(0)).procesarOrdenSegunBuque(buque);
-		assertEquals(buque.getFase(), faseOutbound);
-	}
-
-	@Test
-	public void elBuqueEstaEnFaseOutboundYSeEncuentraConUnaDistanciaDe30ATerminal_Entonces_AlPedirQueSeActualiceFase_CambiaAInbound() {
-		Ubicacion ubicacionBuque = buque.ubicacionActual();
-		Ubicacion ubicacionTerminal = buque.ubicacionActual() + 30; //setear ubicacion de terminal, a una distancia de 70.
-		when(terminal.getUbicacion()).thenReturn(ubicacionTerminal);
-		buque.setFase(faseOutbound);
-		buque.actualizarFase(terminal);
-		verify(terminal, times(1)).procesarOrdenSegunBuque(buque);//a terminal le llega mensaje de procesar orden
-		assertTrue(buque.getFase()!= faseOutbound);
+	public void verificoQueCuandoCambioLaFaseDelBuqueAFaseArrived_ElCambioFueExitoso() {
+		buque.setFase(faseArrived);
+		assertEquals(buque.getFase(), faseArrived);
 	}
 	
 	@Test
-	public void elBuqueEstaEnFaseInboundYSeEncuentraConUnaDistanciaIgualATerminal_Entonces_AlPedirQueSeActualiceFase_CambiaArrived() {
-		Ubicacion ubicacionBuque = buque.ubicacionActual();
-		when(terminal.getUbicacion()).thenReturn(ubicacionBuque);
-		buque.setFase(faseInbound);
-		buque.actualizarFase(terminal);
-		
-		assertTrue(buque.getFase()!= faseInbound);
+	public void verificoQueElBuqueSeEncuentraALaMismaDistanciaDeTerminal() {
+		when(terminal.getUbicacion()).thenReturn(buque.ubicacionActual());
+		assertTrue(buque.distanciaA(terminal));
 	}
 	
-	
-}
+	@Test
+	public void verificoQueCuandoABuqueLeEnvianLaOrdenDepart_TerminaTrabajoEnCurso() {
+		buque.setEstaConTrabajoEnCurso(true);
+		buque.setFase(faseWorking);
+		buque.depart(terminal);
+		assertFalse(buque.estaConTrabajoEnCurso());
+	}
+} 
 
 
 

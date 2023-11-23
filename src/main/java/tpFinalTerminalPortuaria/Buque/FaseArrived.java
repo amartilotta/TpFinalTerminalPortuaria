@@ -10,10 +10,10 @@ public class FaseArrived extends Fase{
 	@Override
 	public void actualizar(Terminal terminal) {
 		if(this.getBuque().estaConTrabajoEnCurso()) {
-			Fase faseNueva = new FaseWorking(this.getBuque());
+			FaseWorking faseNueva = new FaseWorking(this.getBuque());
 			this.getBuque().setFase(faseNueva);	
 		}
 	}
 
 
-}
+} 
