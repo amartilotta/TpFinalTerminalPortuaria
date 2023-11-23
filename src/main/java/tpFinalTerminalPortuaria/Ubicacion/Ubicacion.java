@@ -19,20 +19,14 @@ public class Ubicacion {
         return longitud;
     }
 
-    public double calcularDistancia(Terminal terminal) {
+    public double calcularDistancia(Ubicacion otraUbicacion) {
         double radioTierra = 6371; // Radio medio de la Tierra en kilómetros
 
-        double latitudTerminal = Math.toRadians(terminal.getUbicacion().getLatitud());
-        double longitudTerminal = Math.toRadians(terminal.getUbicacion().getLongitud());
-
-        double latitudActual = Math.toRadians(this.latitud);
-        double longitudActual = Math.toRadians(this.longitud);
-
-        double dLatitud = latitudTerminal - latitudActual;
-        double dLongitud = longitudTerminal - longitudActual;
+        double dLatitud = Math.toRadians(otraUbicacion.getLatitud() - this.latitud);
+        double dLongitud = Math.toRadians(otraUbicacion.getLongitud() - this.longitud);
 
         double a = Math.sin(dLatitud / 2) * Math.sin(dLatitud / 2) +
-                   Math.cos(latitudActual) * Math.cos(latitudTerminal) *
+                   Math.cos(Math.toRadians(this.latitud)) * Math.cos(Math.toRadians(otraUbicacion.getLatitud())) *
                    Math.sin(dLongitud / 2) * Math.sin(dLongitud / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
