@@ -34,5 +34,15 @@ public class LineaNaviera {
 		Map<Terminal, LocalDate> informacion = circuito.getTerminalesYFechasSalida();
 		return new Cronograma(informacion);
 	}
+	
+	public void añadirViaje() {
+		Viaje viaje = new Viaje()
+	}
+//	Devolver la próxima fecha de partida de un buque desde la terminal gestionada
+//	hasta otra terminal de destino.
+
+	public List<CircuitoMaritimo> getCircuitos(){
+		return this.circuitos;
+	}
 
 }

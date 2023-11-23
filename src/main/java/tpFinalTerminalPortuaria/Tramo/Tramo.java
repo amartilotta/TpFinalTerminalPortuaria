@@ -8,32 +8,28 @@ public class Tramo {
 	private Terminal terminalOrigen;
 	private Terminal terminalDestino;
 	private int precio;
-	private LocalDate diaLLegada;
-	private LocalDate diaSalida;
-	private long duracion; // en días
+	private int duracion; // en días
 	
-	public Tramo(Terminal terminalOrigen, Terminal terminalDestino, int precio, LocalDate diaLlegada, LocalDate diaSalida, long duracion) {
+	public Tramo(Terminal terminalOrigen, Terminal terminalDestino, int precio, int duracion) {
 		this.terminalOrigen = terminalOrigen;
 		this.terminalDestino = terminalDestino;
 		this.precio = precio;
-		this.diaLLegada = diaLlegada;
-		this.diaSalida = diaSalida;
 		this.duracion = duracion;
 	}
 
 	public Terminal getTerminalOrigen() {
 		return this.terminalOrigen;
 	}
-
-	public LocalDate getFechaSalida() {
-		return this.diaSalida;
-	}
 	
-	 public long calcularTiempoDeRecorrido() {
+	 public int getDuracionEnDias() {
 	        return this.duracion;
 	    }
 
 	public Terminal getTerminalDestino() {
 		return this.terminalDestino;
+	}
+	
+	public int getPrecio() {
+		return this.precio;
 	}
 }
