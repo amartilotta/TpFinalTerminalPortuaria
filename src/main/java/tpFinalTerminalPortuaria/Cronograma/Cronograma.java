@@ -1,13 +1,18 @@
 package tpFinalTerminalPortuaria.Cronograma;
-import tpFinalTerminalPortuaria.Buque.Buque;
+
+import tpFinalTerminalPortuaria.terminal.Terminal;
 import java.time.LocalDate;
 import java.util.*;
 
 public class Cronograma {
-	private Map<Buque, List<LocalDate>> cronograma = new HashMap();
+	private Map<Terminal, LocalDate> cronograma = new HashMap<>();
+
+	public Cronograma(Map<Terminal, LocalDate> informacion) {
+		this.cronograma = informacion;
+	}
 	
-	public Cronograma(Buque buque, List<LocalDate> fechas) {
-		this.cronograma.put(buque, fechas);
+	public Map<Terminal, LocalDate> getCronogramaDeViaje(){
+		return this.cronograma;
 	}
 
 }
