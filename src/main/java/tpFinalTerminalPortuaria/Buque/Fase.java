@@ -1,5 +1,5 @@
 package tpFinalTerminalPortuaria.Buque;
-import tpFinalTerminalPortuaria.terminal.Terminal;
+import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 
 public abstract class Fase {
 	private Buque buque;
@@ -12,5 +12,5 @@ public abstract class Fase {
 		return this.buque;
 	}
 	
-	public abstract void actualizar(Terminal terminal);
+	public abstract void actualizar(TerminalGestionada terminal);
 }

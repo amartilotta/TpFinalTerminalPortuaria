@@ -28,7 +28,7 @@ public class FaseInboundTestCase {
 	@Test
 	public void verificoQueSiBuqueEstaEnLaMismaUbicacionATerminal_EntoncesPasaAFaseArrived() {
 		 // Configurar el mock para que tenga trabajo en curso
-		when(buqueMock.distanciaA(terminalMock)).thenReturn(0);
+		when(buqueMock.distanciaA(terminalMock)).thenReturn(0d);
 
         // Llamó al método actualizar de faseInbound
 		faseInbound.actualizar(terminalMock);
@@ -37,8 +37,8 @@ public class FaseInboundTestCase {
         verify(buqueMock).setFase(any(FaseArrived.class));
 
   
-        // aseguro de que el método ubicacionActual() se llamó
-        verify(buqueMock).ubicacionActual();
+        // aseguro de que el método distanciaA() se llamó
+        verify(buqueMock).distanciaA(terminalMock);
  
 	}
 	

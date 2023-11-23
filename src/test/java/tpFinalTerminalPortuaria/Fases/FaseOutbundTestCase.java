@@ -28,7 +28,7 @@ public class FaseOutbundTestCase {
 		@Test
 		public void verificoQueSiBuqueEstaCercanoATerminal_EntoncesPasaAFaseWorking() {
 			 // Configurar el mock para este a una distancia cercana a terminal
-	        when(buqueMock.distanciaA(terminalMock)).thenReturn(30);
+	        when(buqueMock.distanciaA(terminalMock)).thenReturn(30d);
 
 	        // Llamó al método actualizar de FaseArrived
 	        faseOutbound.actualizar(terminalMock);

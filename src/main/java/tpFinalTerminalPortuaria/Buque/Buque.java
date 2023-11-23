@@ -5,6 +5,7 @@ import java.util.List;
 import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
 import tpFinalTerminalPortuaria.terminal.Terminal;
+import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 
 public class Buque {
 	private String nombre;
@@ -63,24 +64,24 @@ public class Buque {
 	}
 	
 	//METODOS:
-	public void actualizarFase(Terminal terminal) {
+	public void actualizarFase(TerminalGestionada terminal) {
 		this.getFase().actualizar(terminal); 
 	} 
 	
-	public void iniciarTrabajo(Terminal terminal) {//La terminal se comunica con el buque para pasar a fase WORKING
+	public void iniciarTrabajo(TerminalGestionada terminal) {//La terminal se comunica con el buque para pasar a fase WORKING
 		this.setEstaConTrabajoEnCurso(true);
 		this.actualizarFase(terminal);
 	}
 	
-	public void depart(Terminal terminal) {
+	public void depart(TerminalGestionada terminal) {
 		this.setEstaConTrabajoEnCurso(false);
 		this.actualizarFase(terminal);
 	}
 
-/*	public int distanciaA(Terminal terminal) {
+	public Double distanciaA(Terminal terminal) {
 		Ubicacion ubicacionActual = this.ubicacionActual();
-		int distancia = ubicacionActual.distanciaA(terminal.getUbicacion());
+		Double distancia = ubicacionActual.calcularDistancia(terminal.getUbicacion());
 		return distancia;
-	}*/
+	}
 	 
 }
