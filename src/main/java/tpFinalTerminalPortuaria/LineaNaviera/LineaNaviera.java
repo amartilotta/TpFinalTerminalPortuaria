@@ -2,11 +2,10 @@ package tpFinalTerminalPortuaria.LineaNaviera;
 import tpFinalTerminalPortuaria.Buque.Buque;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
-import tpFinalTerminalPortuaria.Cronograma.Cronograma;
-import tpFinalTerminalPortuaria.terminal.Terminal;
+import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
+
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.time.LocalDate;
 
 public class LineaNaviera {
@@ -22,24 +21,47 @@ public class LineaNaviera {
 		this.circuitos = circuitos;
 	}
 	
-	public double tiempoDesdeTerminalHastaTerminal(Terminal terminalGestionada, Terminal terminal){
-		return 0;
+	public String getNombreEmpresa() {
+		return this.nombreEmpresa;
 	}
-	
-	public double fechaBuqueMasProximoASalir(Terminal terminalGestionada, Terminal terminal) {
-		return 0;
+
+	public List<Buque> getBuques() {
+		return this.buques;
 	}
-	
-	public Cronograma generarCronogramaViaje(CircuitoMaritimo circuito) {
-		Map<Terminal, LocalDate> informacion = circuito.getTerminalesYFechasSalida();
-		return new Cronograma(informacion);
+
+	public List<Viaje> getViajes() {
+		return this.viajes;
 	}
-	
-	public void añadirViaje() {
-		Viaje viaje = new Viaje()
+
+	public void crearViaje(Buque buque, CircuitoMaritimo circuito, LocalDate fechaDeSalida) {
+		Viaje nuevoNiaje = new Viaje(fechaDeSalida,circuito,buque);
+		viajes.add(nuevoNiaje);
 	}
 //	Devolver la próxima fecha de partida de un buque desde la terminal gestionada
 //	hasta otra terminal de destino.
+	public LocalDate proximaFechaPartidaDeBuqueEnTerminal(Buque buque, TerminalGestionada terminal) {
+        List<Viaje> viajesFiltrados = filtrarViajesPorBuque(buque.getNombre())
+                .stream()
+                .filter(viaje -> viaje.tieneTerminal(terminal))
+                .collect(Collectors.toList());
+
+        LocalDate fechaActual = LocalDate.now();
+
+        // Obtener la fecha más próxima del cronograma de la terminal
+        LocalDate fechaProxima = viajesFiltrados.stream()
+                .map(viaje -> viaje.getCronograma().getCronogramaDeViaje().get(terminal))
+                .filter(terminalFecha -> terminalFecha.isAfter(fechaActual))
+                .min(Comparator.naturalOrder())
+                .orElse(null);
+
+        return fechaProxima;
+    }
+	
+	public List<Viaje> filtrarViajesPorBuque(String nombreBuque) {
+        return viajes.stream()
+                .filter(viaje -> viaje.getBuque().getNombre().equals(nombreBuque))
+                .collect(Collectors.toList());
+    }
 
 	public List<CircuitoMaritimo> getCircuitos(){
 		return this.circuitos;

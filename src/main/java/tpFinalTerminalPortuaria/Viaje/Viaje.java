@@ -22,6 +22,7 @@ public class Viaje {
 		this.buque = buque;
 		this.circuito = circuito;
 		this.cronograma = generarCronograma();
+		this.precioDelViaje = costoCircuito();
 	}
 	
 	public double getPrecioDelViaje() {
@@ -44,7 +45,7 @@ public class Viaje {
 		return cronograma;
 	}
 	
-	public long costoCircuito() {
+	private long costoCircuito() {
 		return this.circuito.calcularPrecioTotal();
 	}
 
@@ -66,6 +67,10 @@ public class Viaje {
 	    }
 
 	    return new Cronograma(cronograma);
+	}
+	
+	public boolean tieneTerminal(Terminal terminal) {
+	    return cronograma.containsKey(terminal);
 	}
 	
 

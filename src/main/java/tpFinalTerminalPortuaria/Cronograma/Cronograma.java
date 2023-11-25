@@ -15,4 +15,8 @@ public class Cronograma {
 		return this.cronograma;
 	}
 
+	public boolean containsKey(Terminal terminal) {
+	    return cronograma.containsKey(terminal);
+	}
+
 }
