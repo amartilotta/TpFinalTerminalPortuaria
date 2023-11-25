@@ -15,5 +15,6 @@ public class FaseArrived extends Fase{
 		}
 	}
 
+	//implementar estacontrabajo en curso en el state
 
 } 

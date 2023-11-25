@@ -11,6 +11,8 @@ import tpFinalTerminalPortuaria.EmpresaTransportista.EmpresaTransportista;
 import tpFinalTerminalPortuaria.ICriterio.ICriterio;
 import tpFinalTerminalPortuaria.ICriterio.MenorCantidadTerminalesOrigenDestino;
 import tpFinalTerminalPortuaria.Orden.Orden;
+import tpFinalTerminalPortuaria.Persona.Shipper;
+import tpFinalTerminalPortuaria.Persona.Consignee;
 
 
 
@@ -19,6 +21,8 @@ public class TerminalGestionada extends Terminal {
     private ICriterio estrategiaCircuito;
     private List<EmpresaTransportista> empresasTransportistas =  new ArrayList<EmpresaTransportista>();
     private List<Orden> ordenes = new ArrayList<Orden>();
+    private List<Shipper> shippers = new ArrayList<Shipper>();
+    private List<Consignee> consignees = new ArrayList<Consignee>();
 	//Constructor principal
 	public TerminalGestionada(Ubicacion ubicacion) {
 	    super(ubicacion);
@@ -45,6 +49,17 @@ public class TerminalGestionada extends Terminal {
 	public void registrarOrden(Orden orden) {
 		this.ordenes.add(orden);
 	}
+	
+	public void registrarShipper(Shipper shipper){
+		this.shippers.add(shipper);
+	}
+	public void registrarConsignee(Consignee consignee){
+		this.consignees.add(consignee);
+	}
+	public void registrarCamiones(){
+		
+	}
+	
 	public void procesarOrdenSegunBuque(Buque buque) {
 		
 	}

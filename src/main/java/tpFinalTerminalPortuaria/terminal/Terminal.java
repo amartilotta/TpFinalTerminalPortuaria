@@ -4,9 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
-import tpFinalTerminalPortuaria.EmpresaTransportista.EmpresaTransportista;
 import tpFinalTerminalPortuaria.LineaNaviera.LineaNaviera;
-import tpFinalTerminalPortuaria.Orden.Orden;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
 
 public abstract class Terminal {
@@ -43,7 +41,7 @@ public abstract class Terminal {
 	                circuitos.add(circuito);
 	            }
 	        }
-	    }
+	    }// hacerlo en naviera, dejarle la responsabilidad a ella
 	    return circuitos;
 	}
 	

@@ -45,7 +45,7 @@ public class ViajeTestCase {
 
 
         // Comprueba que el precio del viaje coincide con el valor esperado
-        assertEquals((long) 1000, viaje.costoCircuito(), 0.001);
+        assertEquals((long) 1000, viaje.getPrecioDelViaje(), 0.001);
     }
 
     @Test
