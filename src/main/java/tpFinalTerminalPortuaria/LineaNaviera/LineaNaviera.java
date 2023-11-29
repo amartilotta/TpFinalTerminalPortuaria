@@ -47,10 +47,11 @@ public class LineaNaviera {
 
         LocalDate fechaActual = LocalDate.now();
 
-        // Obtener la fecha más próxima del cronograma de la terminal
         LocalDate fechaProxima = viajesFiltrados.stream()
-                .map(viaje -> viaje.getCronograma().getCronogramaDeViaje().get(terminal))
-                .filter(terminalFecha -> terminalFecha.isAfter(fechaActual))
+                .map(viaje -> viaje.obtenerEntradaCronograma(terminal))
+                .filter(Objects::nonNull)
+                .filter(entry -> entry.getValue().isAfter(fechaActual))
+                .map(Map.Entry::getValue)
                 .min(Comparator.naturalOrder())
                 .orElse(null);
 

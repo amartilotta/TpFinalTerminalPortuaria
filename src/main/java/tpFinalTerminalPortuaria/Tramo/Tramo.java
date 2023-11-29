@@ -3,7 +3,7 @@ package tpFinalTerminalPortuaria.Tramo;
 import java.time.LocalDate;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
-public class Tramo {
+public class Tramo implements Comparable<Tramo>{
 
 	private Terminal terminalOrigen;
 	private Terminal terminalDestino;
@@ -32,4 +32,9 @@ public class Tramo {
 	public int getPrecio() {
 		return this.precio;
 	}
+
+	@Override
+    public int compareTo(Tramo otroTramo) {
+        return Integer.compare(this.duracion, otroTramo.getDuracionEnDias());
+    }
 }

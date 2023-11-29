@@ -11,11 +11,11 @@ import java.util.*;
 
 public class Viaje {
 	
-	private double precioDelViaje;
+	private long precioDelViaje;
 	private LocalDate fechaSalida;
 	private Buque buque;
 	private CircuitoMaritimo circuito;
-	private Cronograma cronograma;
+	private Map<Terminal, LocalDate> cronograma;
 	
 	public Viaje(LocalDate fechaSalida, CircuitoMaritimo circuito, Buque buque) {
 		this.fechaSalida = fechaSalida;
@@ -25,7 +25,7 @@ public class Viaje {
 		this.precioDelViaje = costoCircuito();
 	}
 	
-	public double getPrecioDelViaje() {
+	public long getPrecioDelViaje() {
 		return precioDelViaje;
 	}
 
@@ -41,16 +41,17 @@ public class Viaje {
 		return circuito;
 	}
 
-	public Cronograma getCronograma() {
-		return cronograma;
+	public Map<Terminal, LocalDate> getCronograma() {
+		return this.cronograma;
 	}
 	
 	private long costoCircuito() {
 		return this.circuito.calcularPrecioTotal();
 	}
 
-	private Cronograma generarCronograma() {
+	protected Map<Terminal, LocalDate> generarCronograma() {
 	    Map<Terminal, LocalDate> cronograma = new HashMap<>();
+	    LocalDate fechaActual = fechaSalida;
 
 	    // Iterar sobre los tramos ordenados en el TreeSet
 	    for (Tramo tramo : circuito.getTramos()) {
@@ -59,19 +60,28 @@ public class Viaje {
 	        // Verificar si la terminal ya está en el cronograma
 	        if (!cronograma.containsKey(terminalOrigen)) {
 	            // Si no está en el cronograma, agregar con la fecha actual
-	            cronograma.put(terminalOrigen, fechaSalida);
+	            cronograma.put(terminalOrigen, fechaActual);
 	        }
 
 	        // Calcular la fecha de salida para la siguiente terminal
-	        fechaSalida = fechaSalida.plusDays(tramo.getDuracionEnDias());
+	        fechaActual = fechaActual.plusDays(tramo.getDuracionEnDias());
 	    }
 
-	    return new Cronograma(cronograma);
+	    return cronograma;
 	}
 	
 	public boolean tieneTerminal(Terminal terminal) {
 	    return cronograma.containsKey(terminal);
 	}
+	
+	public Map.Entry<Terminal, LocalDate> obtenerEntradaCronograma(Terminal terminal) {
+        for (Map.Entry<Terminal, LocalDate> entry : cronograma.entrySet()) {
+            if (entry.getKey().equals(terminal)) {
+                return entry;
+            }
+        }
+        return null;
+    }
 	
 
 }
