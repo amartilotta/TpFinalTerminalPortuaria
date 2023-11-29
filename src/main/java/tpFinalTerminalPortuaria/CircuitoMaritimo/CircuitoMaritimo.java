@@ -22,9 +22,9 @@ public class CircuitoMaritimo {
 		return tramos.isEmpty() ? null : tramos.first().getTerminalOrigen();
 	    }
 
-	public Terminal getPuertoDestino() {
-	    return tramos.isEmpty() ? null : tramos.last().getTerminalOrigen();
-	    }
+//	public Terminal getPuertoDestino() {
+//	    return tramos.isEmpty() ? null : tramos.last().getTerminalOrigen();
+//	    }
 	
 	public TreeSet<Tramo> getTramos() {
 		return this.tramos;
