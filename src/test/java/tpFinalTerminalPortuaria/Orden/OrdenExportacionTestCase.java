@@ -71,7 +71,7 @@ public class OrdenExportacionTestCase {
 	public void agregoServicioDeHigieneConUnValorDe90ALaOrden_Y_VerificoQueElPrecioTotalDeServiciosEs90d() {
 		when(container.volumen()).thenReturn(50d);
 		when(servicioHigiene.getPrecioPorMinimoVol()).thenReturn(90d);
-		when(servicioHigiene.precioFinal(container)).thenReturn(90d);
+		when(servicioHigiene.precioFinal()).thenReturn(90d);
 		orden.agregarServicio(servicioHigiene);
 		assertTrue(orden.precioTotalServicios() == 90d);
 	}

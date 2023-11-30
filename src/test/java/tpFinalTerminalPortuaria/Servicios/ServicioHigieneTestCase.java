@@ -16,9 +16,9 @@ public class ServicioHigieneTestCase {
 	@Before
 	public void setUp() throws Exception {
 		container = mock(Container.class);
-		servicio  = new ServicioHigiene(1200d, 100d);
+		servicio  = new ServicioHigiene(1200d, 100d, container);
 	}
-
+ 
 	@Test
 	public void cuandoSeCreaUnServicioHigiene_TieneUnPrecioFijoYUnPrecioPorMinimoVolumen() {
 		assertTrue(servicio.getPrecioFijo() == 1200d);
@@ -40,6 +40,6 @@ public class ServicioHigieneTestCase {
 	@Test
 	public void verificoQueElPrecioFinalDelServicioEs_100d_PorQueElContainerTieneUnVolumenMenorA70() {
 		when(container.volumen()).thenReturn(60d);
-		assertTrue(servicio.precioFinal(container) == 100d);
+		assertTrue(servicio.precioFinal() == 100d);
 	} 
 }

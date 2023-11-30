@@ -10,20 +10,20 @@ import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import tpFinalTerminalPortuaria.Container.Container;
+import tpFinalTerminalPortuaria.Container.ContainerReefer;
 
 public class ServicioElectricidadTestCase {
 	private ServicioElectricidad servicio;
-	private Container container;
+	private ContainerReefer container;
 	private LocalDateTime fechaYHInicio;
 	private LocalDateTime fechaYHFin;
-	
+	 
 	@Before
 	public void setUp() throws Exception {
-		container     = mock(Container.class);
+		container     = mock(ContainerReefer.class);
 		fechaYHInicio = LocalDateTime.of(2023, 12, 25, 15, 30);
 		fechaYHFin    = LocalDateTime.of(2023, 12, 26, 15, 30);
-		servicio      = new ServicioElectricidad(1200d, fechaYHInicio, fechaYHFin);	
+		servicio      = new ServicioElectricidad(1200d, fechaYHInicio, fechaYHFin, container);	
 	}
 	
 	
@@ -51,20 +51,20 @@ public class ServicioElectricidadTestCase {
 	public void verificoQueLosKWConsumidosSon_28800d() {
 		//SEGUN LAS FECHAS DADAS HAY UNA DIFERENCIA DE 24HS.
 		//24 * consumoDelRefer() seria los kwconsumidos.
-		when(container.getConsumoKwHr()).thenReturn(1200d);
-		Double kwConsumidos = servicio.totalKWConsumidos(container);
+		when(container.getConsumo()).thenReturn(1200d);
+		Double kwConsumidos = servicio.totalKWConsumidos();
 		assertTrue(kwConsumidos ==  28800.0d);
 		
 	}
 	
 	@Test 
 	public void verificoQueElPrecioFinalDelServicioEs3456E7(){
-		when(container.getConsumoKwHr()).thenReturn(1200d);
-		Double kwConsumidos = servicio.totalKWConsumidos(container);
-		Double precioFinalEsperado = kwConsumidos * servicio.getPrecioFijo();
-		assertTrue(servicio.precioFinal(container) == 3.456E7);
+		when(container.getConsumo()).thenReturn(1200d);
+		//Double kwConsumidos = servicio.totalKWConsumidos();
+		//Double precioFinalEsperado = kwConsumidos * servicio.getPrecioFijo();
+		assertTrue(servicio.precioFinal() == 3.456E7);
 	}
-	
+	 
 }
 
 

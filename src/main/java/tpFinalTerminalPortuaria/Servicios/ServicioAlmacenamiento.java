@@ -4,12 +4,12 @@ import tpFinalTerminalPortuaria.Container.Container;
 
 public class ServicioAlmacenamiento extends Servicio{
 
-	public ServicioAlmacenamiento(Double precio) {
-		super(precio);
+	public ServicioAlmacenamiento(Double precio, Container container) {
+		super(precio, container);
 	}
 
 	@Override
-	public Double precioFinal(Container container) {
+	public Double precioFinal() {
 		return this.getPrecioFijo();
 	}
 

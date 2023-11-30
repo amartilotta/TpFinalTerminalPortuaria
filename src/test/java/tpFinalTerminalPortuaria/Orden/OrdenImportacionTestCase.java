@@ -39,7 +39,7 @@ public class OrdenImportacionTestCase {
 		servicios = new ArrayList<Servicio>();
 		servicioPesaje = mock(ServicioPesaje.class);
 		orden	  = new OrdenImportacion(viaje, container, chofer, camion, servicios, cliente);
-	}
+	} 
 
 	@Test
 	public void cuandoSeCreaUnaOrdenTiene_Viaje_Cliente_chofer_camion_servicios_orden() {
@@ -82,7 +82,7 @@ public class OrdenImportacionTestCase {
 	@Test
 	public void agregoServicioDePesajeConUnValorDe90ALaOrden_Y_VerificoQueElPrecioTotalDeServiciosEs90d() {
 		orden.agregarServicio(servicioPesaje);
-		when(servicioPesaje.precioFinal(container)).thenReturn(90d);
+		when(servicioPesaje.precioFinal()).thenReturn(90d);
 		assertTrue(orden.precioTotalServicios() == 90d);
 	}
 }
