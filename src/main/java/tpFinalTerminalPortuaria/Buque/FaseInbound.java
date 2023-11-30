@@ -12,8 +12,15 @@ public class FaseInbound extends Fase{
 		if (this.getBuque().distanciaA(terminal) == 0d) {
 			Fase fase = new FaseArrived(this.getBuque());
 			this.getBuque().setFase(fase);
-			this.getBuque().setEstaConTrabajoEnCurso(false);
 		}
+	}
+
+	@Override
+	public void depart(TerminalGestionada terminal) {
+	}
+
+	@Override
+	public void iniciarTrabajo(TerminalGestionada terminal) {
 	}
 
 }
