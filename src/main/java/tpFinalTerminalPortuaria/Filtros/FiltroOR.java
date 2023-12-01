@@ -3,7 +3,7 @@ package tpFinalTerminalPortuaria.Filtros;
 import java.util.ArrayList;
 import java.util.List;
 
-import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
 
 public class FiltroOR extends FiltroCompuesto{
 	private IFiltroDeBusqueda filtroA;
@@ -16,8 +16,8 @@ public class FiltroOR extends FiltroCompuesto{
 	}
 	
 	@Override
-	public List<CircuitoMaritimo> filtrar(List<CircuitoMaritimo> circuitos) {
-		List<CircuitoMaritimo> circuitosDelFiltroA = this.filtroA.filtrar(circuitos);
+	public List<Viaje> filtrar(List<Viaje> viajes) {
+	/*	List<CircuitoMaritimo> circuitosDelFiltroA = this.filtroA.filtrar(circuitos);
 		List<CircuitoMaritimo> circuitosDelFiltroB = this.filtroB.filtrar(circuitos);
 		List<CircuitoMaritimo> circuitosFiltrados  = new ArrayList<CircuitoMaritimo>(circuitosDelFiltroA);
 		
@@ -26,8 +26,8 @@ public class FiltroOR extends FiltroCompuesto{
 				circuitosFiltrados.add(circuito);
 			}
 		});
-
-		return circuitosFiltrados;
+*/
+		return null;
 	}
 
 }

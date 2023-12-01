@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FiltroPuertoDestinoDistintoQue extends FiltroSimple{
@@ -19,11 +20,11 @@ public class FiltroPuertoDestinoDistintoQue extends FiltroSimple{
 	}
 	
 	@Override
-	public List<CircuitoMaritimo> filtrar(List<CircuitoMaritimo> circuitos) {
-		List<CircuitoMaritimo> filtrados = circuitos.stream().
+	public List<Viaje> filtrar(List<Viaje> viajes) {
+	/*	List<CircuitoMaritimo> filtrados = circuitos.stream().
 				filter(circuito -> circuito.getPuertoDestino() != this.getDestino())
-				.collect(Collectors.toList());				
-		return filtrados;
+				.collect(Collectors.toList());	*/			
+		return null;
 	}
 
 }

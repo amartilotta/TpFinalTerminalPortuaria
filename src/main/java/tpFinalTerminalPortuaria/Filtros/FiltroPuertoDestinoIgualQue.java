@@ -3,7 +3,7 @@ package tpFinalTerminalPortuaria.Filtros;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FiltroPuertoDestinoIgualQue extends FiltroSimple{
@@ -19,11 +19,11 @@ public class FiltroPuertoDestinoIgualQue extends FiltroSimple{
 	}
 	
 	@Override
-	public List<CircuitoMaritimo> filtrar(List<CircuitoMaritimo> circuitos) {
-		List<CircuitoMaritimo> filtrados = circuitos.stream().
+	public List<Viaje> filtrar(List<Viaje> viajes) {
+	/*	List<CircuitoMaritimo> filtrados = viajes.stream().
 				filter(circuito -> circuito.getPuertoDestino() == this.getDestino())
-				.collect(Collectors.toList());				
-		return filtrados;
+				.collect(Collectors.toList());		*/		
+		return null;
 	}
 
 }
