@@ -3,7 +3,7 @@ package tpFinalTerminalPortuaria.terminal;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 import tpFinalTerminalPortuaria.Buque.Buque;
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
@@ -23,6 +23,7 @@ public class TerminalGestionada extends Terminal {
     private List<Orden> ordenes = new ArrayList<Orden>();
     private List<Shipper> shippers = new ArrayList<Shipper>();
     private List<Consignee> consignees = new ArrayList<Consignee>();
+    
 	//Constructor principal
 	public TerminalGestionada(Ubicacion ubicacion) {
 	    super(ubicacion);
@@ -39,7 +40,8 @@ public class TerminalGestionada extends Terminal {
     }
 	
 	public CircuitoMaritimo calcularMejorCircuito(Terminal terminalDestino) {
-        return estrategiaCircuito.calcularMejorCircuito(this, terminalDestino);
+		List<CircuitoMaritimo> circuitosDisponibles = this.obtenerCircuitosHaciaDestino(terminalDestino); //Metodo de la clase abstracta
+        return estrategiaCircuito.calcularMejorCircuito(circuitosDisponibles);
     }
 	
 	public void agregarEmpresaTrasnportista(EmpresaTransportista empresa) {
