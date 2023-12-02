@@ -12,6 +12,7 @@ import org.junit.*;
 
 import tpFinalTerminalPortuaria.Tramo.Tramo;
 import tpFinalTerminalPortuaria.terminal.Terminal;
+import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 
 
 
@@ -24,6 +25,7 @@ public class CircuitoMaritimoTestCase {
 	private Terminal terminal;
 	private Terminal terminal1;
 	private Terminal terminal2;
+	private TerminalGestionada terminalGestionada;
 
 	@Before
 	public void setUp() {
@@ -33,6 +35,7 @@ public class CircuitoMaritimoTestCase {
 		terminal = mock(Terminal.class);
 		terminal1 = mock(Terminal.class);
 		terminal2 = mock(Terminal.class);
+		terminalGestionada = mock(TerminalGestionada.class);
 
 		tramosDelCircuito.add(tramo1);
 		tramosDelCircuito.add(tramo2);
@@ -112,6 +115,29 @@ public class CircuitoMaritimoTestCase {
 
 
 		assertEquals(1000, circuito.calcularPrecioTotal());
+	}
+	
+	@Test
+	public void contieneTerminales() {
+	    when(tramo1.getTerminalOrigen()).thenReturn(terminalGestionada);
+	    when(tramo2.getTerminalOrigen()).thenReturn(terminal1);
+
+	    assertTrue(circuito.contieneTerminales(terminalGestionada, terminal1));
+	}
+
+	@Test
+	public void tiempoDesdeTerminalHastaTerminal() {
+	    when(tramo1.getTerminalOrigen()).thenReturn(terminal);
+	    when(tramo1.getDuracionEnDias()).thenReturn(3);
+	    when(tramo1.getTerminalDestino()).thenReturn(terminal1);
+
+	    when(tramo2.getTerminalOrigen()).thenReturn(terminal1);
+	    when(tramo2.getDuracionEnDias()).thenReturn(2);
+	    when(tramo2.getTerminalDestino()).thenReturn(terminal2);
+
+	    long tiempo = circuito.tiempoDesdeTerminalHastaTerminal(terminal, terminal2);
+
+	    assertEquals(8, tiempo);
 	}
 
 }

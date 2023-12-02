@@ -64,6 +64,13 @@ public class ServicioElectricidadTestCase {
 		//Double precioFinalEsperado = kwConsumidos * servicio.getPrecioFijo();
 		assertTrue(servicio.precioFinal() == 3.456E7);
 	}
+	
+	@Test 
+	public void cambioElValorDeLaFechaYHoraDeInicioYVerificoElCambio(){
+		LocalDateTime otraHora = LocalDateTime.of(2024, 12, 25, 14, 29);
+		servicio.setFechaYHoraInicio(otraHora);
+		assertEquals(servicio.getFechaYHoraInicio(),otraHora);
+	}
 	 
 }
 

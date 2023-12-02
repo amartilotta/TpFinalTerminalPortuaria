@@ -32,4 +32,22 @@ public class ContainerTanqueTestCase {
 		container.setAltura(1300d);
 		assertTrue(container.getAltura() == 1300d);
 	}
+	
+	@Test
+	public void cambioAnchoA_1300dYVerificoQueLaModificacionFueExitosa() {
+		container.setAncho(1300d);
+		assertTrue(container.getAncho() == 1300d);
+	}
+	
+	@Test
+	public void cambioLargoA_1300dYVerificoQueLaModificacionFueExitosa() {
+		container.setLargo(1300d);
+		assertTrue(container.getLargo() == 1300d);
+	}
+	
+	@Test
+	public void cambioPesoA_1300dYVerificoQueLaModificacionFueExitosa() {
+		container.setPeso(1300d);
+		assertTrue(container.getPeso() == 1300d);
+	}
 }

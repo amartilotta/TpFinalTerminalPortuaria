@@ -37,4 +37,10 @@ public class ContainerReeferTestCase {
 	public void verificoQueElConsumoDeKWPorHoraEs100d() {
 		assertTrue(container.getConsumo() == 100d);
 	}
+	
+	@Test
+	public void cambioConsumoA_1300dYVerificoQueLaModificacionFueExitosa() {
+		container.setConsumo(1300d);
+		assertTrue(container.getConsumo() == 1300d);
+	}
 }
