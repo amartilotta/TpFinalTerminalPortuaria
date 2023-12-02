@@ -16,7 +16,7 @@ public class ServicioPesajeTestCase {
 	@Before
 	public void setUp() throws Exception {
 		container = mock(Container.class);
-		servicio  = new ServicioPesaje(1200d);
+		servicio  = new ServicioPesaje(1200d, container);
 	}
 
 	@Test
@@ -32,6 +32,6 @@ public class ServicioPesajeTestCase {
 	
 	@Test 
 	public void verificoQueElPrecioFinalDelServicioEsIgualAlPrecioFijo(){
-		assertEquals(servicio.precioFinal(container), servicio.getPrecioFijo());
+		assertEquals(servicio.precioFinal(), servicio.getPrecioFijo());
 	}
 }

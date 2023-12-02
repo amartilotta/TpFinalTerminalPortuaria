@@ -1,21 +1,21 @@
 package tpFinalTerminalPortuaria.Container;
 
-public enum Tipo {
-	DRY(0d),
-	TANQUE(0d),
-	REFEER(0d);
-	
+public class ContainerReefer extends Container {
 	private Double consumo;
 	
-	Tipo(Double consumo) { //EL CONSUMO ES SOLO PARA TIPO REFEER
+	public ContainerReefer(Double ancho, Double largo, Double altura, Double peso, Double consumo) {
+		super(ancho, largo, altura, peso);
 		this.consumo = consumo;
 	}
 	
+	//SETTER:
 	public void setConsumo(Double consumo) {
 		this.consumo	=	consumo;
 	}
-	
+	//GETTER:
 	public Double getConsumo() {
 		return this.consumo;
 	}
+	
+	
 }

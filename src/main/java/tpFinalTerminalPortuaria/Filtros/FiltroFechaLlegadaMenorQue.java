@@ -2,25 +2,30 @@ package tpFinalTerminalPortuaria.Filtros;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
+import tpFinalTerminalPortuaria.terminal.Terminal;
 
-public class FiltroFechaLlegadaMenorQue extends FiltroSimple{
+public class FiltroFechaLlegadaMenorQue extends FiltroFecha{
 	private LocalDate fecha;
+	private Terminal terminal;
 	
-	public FiltroFechaLlegadaMenorQue(LocalDate fecha) {
-		this.fecha = fecha;
+	public FiltroFechaLlegadaMenorQue(LocalDate fecha, Terminal terminal) {
+		super(fecha, terminal);
 	}
 	
-	//GETTERS.
-	public LocalDate getFecha() {
-		return this.fecha;
-	}
 	
 	@Override
-	public List<CircuitoMaritimo> filtrar(List<CircuitoMaritimo> circuitos) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Viaje> filtrar(List<Viaje> viajes) {
+		
+		List<Viaje> filtrados = viajes.stream()
+									  .filter(viaje -> viaje.tieneTerminal(terminal) 
+									   && this.fechaEsMenorALaDelFiltro(viaje.fechaAsignadaA(terminal)))
+									  .collect(Collectors.toList());
+				
+				
+		return filtrados;
 	}
-
+	
 }

@@ -13,8 +13,15 @@ public class FaseDeparting extends Fase{
 			Fase faseNueva = new FaseOutbound(this.getBuque());
 			this.getBuque().setFase(faseNueva);
 			terminal.procesarOrdenSegunBuque(this.getBuque());
-		}
-		
+		}	
+	}
+
+	@Override
+	public void depart(TerminalGestionada terminal) {
+	}
+
+	@Override
+	public void iniciarTrabajo(TerminalGestionada terminal) {
 	}
 
 	

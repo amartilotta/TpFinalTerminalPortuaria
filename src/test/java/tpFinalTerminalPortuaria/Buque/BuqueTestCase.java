@@ -20,16 +20,14 @@ public class BuqueTestCase {
 	private Buque buque;
 	private Container container;
 	private FaseArrived faseArrived;
-	private FaseWorking faseWorking;
 	private TerminalGestionada terminal;
 	
 	@Before
 	public void setUp() throws Exception {
-		buque = new Buque("BUQUE");
+		buque 		  = new Buque("BUQUE");
 		container     = mock(Container.class);
 		faseArrived   = mock(FaseArrived.class);
 		terminal      = mock(TerminalGestionada.class);
-		faseWorking   = mock(FaseWorking.class);
 	}
 
 	@Test
@@ -67,21 +65,40 @@ public class BuqueTestCase {
 		assertEquals(buque.getFase(), faseArrived);
 	}
 	
-	@Test
+	@Test 
 	public void verificoQueElBuqueSeEncuentraALaMismaDistanciaDeTerminal() {
 		when(terminal.getUbicacion()).thenReturn(buque.ubicacionActual());
 		assertTrue(buque.distanciaA(terminal)== 0);
 	}
 	
 	@Test
-	public void verificoQueCuandoABuqueLeEnvianLaOrdenDepart_TerminaTrabajoEnCurso() {
-		buque.setEstaConTrabajoEnCurso(true);
-		buque.setFase(faseWorking);
+	public void verificoQueSiCambioElNombreABuque_ElCambioEsExitoso() {
+		buque.setNombre("PRUEBA");
+		assertEquals(buque.getNombre(), "PRUEBA");
+	}
+	
+	@Test
+	public void verificoQueSiABuqueLeMandanOrdenDepart_SeLoDelegaASuFase() {
+		buque.setFase(faseArrived);
 		buque.depart(terminal);
-		assertFalse(buque.estaConTrabajoEnCurso());
+		verify(faseArrived).depart(terminal); 
+	}
+	
+	@Test
+	public void verificoQueSiABuqueLeMandanOrdenIniciarTrabajo_SeLoDelegaASuFase() {
+		buque.setFase(faseArrived);
+		buque.iniciarTrabajo(terminal);
+		verify(faseArrived).iniciarTrabajo(terminal); 
+	}
+	
+	@Test
+	public void verificoQueSiABuqueLeMandanActualizar_SeLoDelegaASuFase() {
+		buque.setFase(faseArrived);
+		buque.actualizarFase(terminal);
+		verify(faseArrived).actualizar(terminal); 
 	}
 } 
 
-
+ 
 
 

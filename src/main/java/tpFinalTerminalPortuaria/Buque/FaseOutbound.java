@@ -17,5 +17,13 @@ public class FaseOutbound extends Fase{
 		
 	}
 
+	@Override
+	public void depart(TerminalGestionada terminal) {
+	}
+
+	@Override
+	public void iniciarTrabajo(TerminalGestionada terminal) {
+	}
+
 
 }

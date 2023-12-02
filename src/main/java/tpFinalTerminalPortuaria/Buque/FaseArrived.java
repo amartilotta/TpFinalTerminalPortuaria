@@ -9,12 +9,17 @@ public class FaseArrived extends Fase{
 	
 	@Override
 	public void actualizar(TerminalGestionada terminal) {
-		if(this.getBuque().estaConTrabajoEnCurso()) {
-			FaseWorking faseNueva = new FaseWorking(this.getBuque());
-			this.getBuque().setFase(faseNueva);	
-		}
+		FaseWorking faseNueva = new FaseWorking(this.getBuque());
+		this.getBuque().setFase(faseNueva);	
 	}
 
-	//implementar estacontrabajo en curso en el state
+	@Override
+	public void depart(TerminalGestionada terminal) {
 
+	}
+
+	@Override
+	public void iniciarTrabajo(TerminalGestionada terminal) {
+		this.actualizar(terminal);
+	}
 } 

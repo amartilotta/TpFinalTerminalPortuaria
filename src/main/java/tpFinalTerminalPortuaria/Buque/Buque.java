@@ -11,26 +11,21 @@ public class Buque {
 	private String nombre;
 	private Fase fase;
 	private Ubicacion ubicacion;
-	private Boolean estaConTrabajoEnCurso;
 	private List<Container> containeres;
 	
 	public Buque(String nombre) {
 		this.nombre = nombre;
 		this.fase = new FaseOutbound(this);//FASE INICIAL
 		this.ubicacion = new Ubicacion(0, 0);
-		this.estaConTrabajoEnCurso = false;
 		this.containeres = new ArrayList<Container>();
 	}
-	
+	 
 	//SETTER:
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	public void setFase(Fase fase) {
 		this.fase = fase;
-	}
-	public void setEstaConTrabajoEnCurso(Boolean esta) {
-		this.estaConTrabajoEnCurso = esta;
 	}
 	
 	public Ubicacion ubicacionActual() {
@@ -56,9 +51,7 @@ public class Buque {
 	public Fase getFase() {
 		return this.fase;
 	}
-	public Boolean estaConTrabajoEnCurso() {
-		return this.estaConTrabajoEnCurso;
-	}
+
 	public List<Container> getContainer(){
 		return this.containeres;
 	}
@@ -69,13 +62,11 @@ public class Buque {
 	} 
 	
 	public void iniciarTrabajo(TerminalGestionada terminal) {//La terminal se comunica con el buque para pasar a fase WORKING
-		this.setEstaConTrabajoEnCurso(true);
-		this.actualizarFase(terminal);
+		this.getFase().iniciarTrabajo(terminal);
 	}
 	
 	public void depart(TerminalGestionada terminal) {
-		this.setEstaConTrabajoEnCurso(false);
-		this.actualizarFase(terminal);
+		this.getFase().depart(terminal);
 	}
 
 	public Double distanciaA(Terminal terminal) {

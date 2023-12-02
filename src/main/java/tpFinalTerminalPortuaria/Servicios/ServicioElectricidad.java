@@ -2,15 +2,18 @@ package tpFinalTerminalPortuaria.Servicios;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import tpFinalTerminalPortuaria.Container.Container;
+import tpFinalTerminalPortuaria.Container.ContainerReefer;
 
 public class ServicioElectricidad extends Servicio{
 	private LocalDateTime fechaYHoraInicio;
 	private LocalDateTime fechaYHoraFin;
+	private ContainerReefer container;
 	
-	public ServicioElectricidad(Double precio, LocalDateTime fechaYHoraInicio, LocalDateTime fechaYHoraFin) {
-		super(precio);//PRECIO FIJO POR KW/HORA CONSUMIDO
+	public ServicioElectricidad(Double precio, LocalDateTime fechaYHoraInicio, LocalDateTime fechaYHoraFin, ContainerReefer container) {
+		super(precio, container);//PRECIO FIJO POR KW/HORA CONSUMIDO
 		this.fechaYHoraInicio = fechaYHoraInicio;
 		this.fechaYHoraFin    = fechaYHoraFin;
+		this.container 		  = container;
 	}
 
 	//SETTER:
@@ -30,17 +33,19 @@ public class ServicioElectricidad extends Servicio{
 		return this.fechaYHoraFin;
 	}
 
+
 	@Override
-	public Double precioFinal(Container container) {
-		return this.totalKWConsumidos(container) * this.getPrecioFijo();
+	public Double precioFinal() {
+		return this.totalKWConsumidos() * this.getPrecioFijo();
 	}
 	
 	
-	//METODOS AUX. --consultar con agus. consumo del refeer lo ponemos en el tipo?
-	public Double totalKWConsumidos(Container container) {
+	//METODOS AUX. 
+	public Double totalKWConsumidos() {
 		Duration diferenciaDeTiempo = Duration.between(this.getFechaYHoraInicio(), this.getFechaYHoraFin());
 		Double diferenciaEnHoras = diferenciaDeTiempo.toMillis() / 3600000d;
-		return diferenciaEnHoras * container.getConsumoKwHr(); //indica los kw consumidos por hora
+		return diferenciaEnHoras * this.container.getConsumo(); //indica los kw consumidos por hora
 	}
 
+ 
 }
