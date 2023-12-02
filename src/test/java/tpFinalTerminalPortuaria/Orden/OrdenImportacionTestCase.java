@@ -16,6 +16,7 @@ import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
 import tpFinalTerminalPortuaria.Persona.Consignee;
+import tpFinalTerminalPortuaria.Persona.Shipper;
 import tpFinalTerminalPortuaria.Servicios.Servicio;
 import tpFinalTerminalPortuaria.Servicios.ServicioPesaje;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
@@ -48,6 +49,13 @@ public class OrdenImportacionTestCase {
 		assertEquals(orden.getCliente(), cliente);
 		assertEquals(orden.getServicios(), servicios);
 		assertEquals(orden.getViaje(), viaje);
+	}
+	
+	@Test
+	public void cambioClienteA_OtroClienteYVerificoQueLaModificacionFueExitosa() {
+		Consignee otroCliente = mock(Consignee.class);
+		orden.setCliente(otroCliente);
+		assertEquals(orden.getCliente(),otroCliente);
 	}
 	
 	@Test
