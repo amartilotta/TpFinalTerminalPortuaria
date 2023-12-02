@@ -19,17 +19,16 @@ public class FiltroAND extends FiltroCompuesto{
 	@Override
 	public List<Viaje> filtrar(List<Viaje> viajes) {
 		
-	/*	List<CircuitoMaritimo> circuitosDelFiltroA = this.filtroA.filtrar(circuitos);
-		List<CircuitoMaritimo> circuitosDelFiltroB = this.filtroB.filtrar(circuitos);
-		List<CircuitoMaritimo> circuitosFiltrados  = new ArrayList<CircuitoMaritimo>();
+		List<Viaje> viajesDelFiltroA = this.filtroA.filtrar(viajes);
+		List<Viaje> viajesDelFiltroB = this.filtroB.filtrar(viajes);
+		List<Viaje> viajesFiltrados  = new ArrayList<Viaje>();
 		
-		circuitosDelFiltroB.forEach(circuito ->{
-			if (circuitosDelFiltroA.contains(circuito)) {
-				circuitosFiltrados.add(circuito);
+		viajesDelFiltroB.forEach(viaje ->{
+			if (viajesDelFiltroA.contains(viaje)) {
+				viajesFiltrados.add(viaje);
 			}
 		});
 
-		return circuitosFiltrados;*/
-		return null;
+		return viajesFiltrados;
 	}
 }

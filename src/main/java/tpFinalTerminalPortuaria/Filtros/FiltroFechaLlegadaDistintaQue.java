@@ -2,31 +2,30 @@ package tpFinalTerminalPortuaria.Filtros;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
-public class FiltroFechaLlegadaDistintaQue extends FiltroSimple{
+public class FiltroFechaLlegadaDistintaQue extends FiltroFecha{
 	private LocalDate fecha;
 	private Terminal terminal;
 	
 	public FiltroFechaLlegadaDistintaQue(LocalDate fecha, Terminal terminal) {
-		this.fecha 		= fecha;
-		this.terminal 	= terminal;
-	}
-	
-	//GETTERS.
-	public LocalDate getFecha() {
-		return this.fecha;
-	}
-	public Terminal getTerminal() {
-		return this.terminal;
+		super(fecha, terminal);
 	}
 	
 	@Override
 	public List<Viaje> filtrar(List<Viaje> viajes) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Viaje> filtrados = viajes.stream()
+									  .filter(viaje -> viaje.tieneTerminal(terminal) 
+									   && this.fechaEsDistintaALaDelFiltro(viaje.fechaAsignadaA(terminal)))
+									  .collect(Collectors.toList());
+				
+				
+		return filtrados;
 	}
+	
 
 }
