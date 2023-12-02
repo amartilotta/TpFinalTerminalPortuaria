@@ -38,6 +38,10 @@ public class LineaNaviera {
 		return this.circuitos;
 	}
 	
+	public void añadirCircuito(CircuitoMaritimo circuito) {
+		this.circuitos.add(circuito);
+	}
+	
 	public void crearViaje(Buque buque, CircuitoMaritimo circuito, LocalDate fechaDeSalida) {
 		Viaje nuevoNiaje = new Viaje(fechaDeSalida,circuito,buque);
 		viajes.add(nuevoNiaje);
