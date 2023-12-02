@@ -1,6 +1,4 @@
 package tpFinalTerminalPortuaria.ICriterio;
-import tpFinalTerminalPortuaria.terminal.Terminal;
-import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 
 import java.util.*;
 
