@@ -39,14 +39,16 @@ public class LineaNavieraTestCase {
 
 
 
-        List<CircuitoMaritimo> circuitos = new ArrayList<>();
+
+    	
+        
+
+       List<CircuitoMaritimo> circuitos = new ArrayList<>();
         // Agrega buques y circuitos según sea necesario
         // ...
 
 
-
-
-        lineaNaviera = new LineaNaviera("MiLineaNaviera", buques, circuitos);
+       lineaNaviera = new LineaNaviera("MiLineaNaviera", buques, circuitos);
     }
 
     @Test

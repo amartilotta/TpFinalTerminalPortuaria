@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
 import tpFinalTerminalPortuaria.LineaNaviera.LineaNaviera;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
@@ -71,3 +72,5 @@ public class TerminalTestCase {
 
 
 }
+
+
