@@ -11,16 +11,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Filtros.FiltroFechaLlegadaIgualQue;
 import tpFinalTerminalPortuaria.Filtros.FiltroFechaLlegadaMayorQue;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
 
 public class FiltroFechaLlegadaMayorQueTestCase {
 	private LocalDate fecha1;
 	private LocalDate fecha2;
 	private LocalDate fecha3;
 	private FiltroFechaLlegadaMayorQue filtro;
-	private CircuitoMaritimo circuitoA;
-	private CircuitoMaritimo circuitoB;
-	private List<CircuitoMaritimo> circuitos;
+	private Viaje viajeA;
+	private Viaje viajeB;
+	private List<Viaje> viajes;
 	
 	
 	@Before
@@ -29,10 +31,12 @@ public class FiltroFechaLlegadaMayorQueTestCase {
 		fecha2 = LocalDate.of(2015, 10, 4);
 		fecha3 = LocalDate.of(1977, 7, 15);
 		filtro = new FiltroFechaLlegadaMayorQue(fecha1);
-		circuitoA = mock(CircuitoMaritimo.class);
-		circuitoB = mock(CircuitoMaritimo.class);
-		circuitos = new ArrayList<CircuitoMaritimo>();
+		viajeA = mock(Viaje.class);
+		viajeB = mock(Viaje.class);
+		viajes = new ArrayList<Viaje>();
 	}
+	
+
 	
 	@Test
 	public void cuandoSeCreaUnFiltroFechaLlegadaMayorQue_EsteTieneUnaFechaDada() {
@@ -41,7 +45,7 @@ public class FiltroFechaLlegadaMayorQueTestCase {
 	
 	@Test
 	public void cuandoAUnFiltroFechaLlegadaMayorQue_LePidoFiltrarUnaListaDeCircuitosVacia_EntoncesDevuelveUnaListaVacía() {
-		assertEquals(0, filtro.filtrar(circuitos).size());
+		assertEquals(0, filtro.filtrar(viajes).size());
 	}
 	
 	@Test

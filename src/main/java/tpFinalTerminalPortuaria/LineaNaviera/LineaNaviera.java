@@ -3,6 +3,7 @@ import tpFinalTerminalPortuaria.Buque.Buque;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
 import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
+import tpFinalTerminalPortuaria.terminal.Terminal;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,30 +34,55 @@ public class LineaNaviera {
 		return this.viajes;
 	}
 
+	public List<CircuitoMaritimo> getCircuitos(){
+		return this.circuitos;
+	}
+	
+	public void añadirCircuito(CircuitoMaritimo circuito) {
+		this.circuitos.add(circuito);
+	}
+	
 	public void crearViaje(Buque buque, CircuitoMaritimo circuito, LocalDate fechaDeSalida) {
 		Viaje nuevoNiaje = new Viaje(fechaDeSalida,circuito,buque);
 		viajes.add(nuevoNiaje);
 	}
-//	Devolver la próxima fecha de partida de un buque desde la terminal gestionada
+
+//	5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada
 //	hasta otra terminal de destino.
-	public LocalDate proximaFechaPartidaDeBuqueEnTerminal(Buque buque, TerminalGestionada terminal) {
-        List<Viaje> viajesFiltrados = filtrarViajesPorBuque(buque.getNombre())
+	public LocalDate proximaFechaPartidaDeBuqueDesdeTerminalHastaTerminal(Buque buque, TerminalGestionada terminalGestionada, Terminal puertoDestino) {
+        List<Viaje> viajesFiltrados = this.filtrarViajesPorBuque(buque.getNombre())
                 .stream()
-                .filter(viaje -> viaje.tieneTerminal(terminal))
+                .filter(viaje -> viaje.getCircuito().contieneTerminales(terminalGestionada, puertoDestino))
                 .collect(Collectors.toList());
 
         LocalDate fechaActual = LocalDate.now();
 
         LocalDate fechaProxima = viajesFiltrados.stream()
-                .map(viaje -> viaje.obtenerEntradaCronograma(terminal))
+                .map(viaje -> viaje.calcularFechaProxima(terminalGestionada, puertoDestino, fechaActual))
                 .filter(Objects::nonNull)
-                .filter(entry -> entry.getValue().isAfter(fechaActual))
-                .map(Map.Entry::getValue)
                 .min(Comparator.naturalOrder())
                 .orElse(null);
 
         return fechaProxima;
     }
+	
+	public LocalDate proximaFechaPartidaDeBuqueEnTerminal(Buque buque, TerminalGestionada terminal) {
+	    List<Viaje> viajesFiltrados = this.filtrarViajesPorBuque(buque.getNombre())
+	            .stream()
+	            .filter(viaje -> viaje.tieneTerminal(terminal))
+	            .collect(Collectors.toList());
+
+	    LocalDate fechaActual = LocalDate.now();
+
+	    LocalDate fechaProxima = viajesFiltrados.stream()
+	            .map(viaje -> viaje.obtenerFechaSalidaDeTerminal(terminal))
+	            .filter(Objects::nonNull)
+	            .filter(fecha -> fecha.isAfter(fechaActual))
+	            .min(Comparator.naturalOrder())
+	            .orElse(null);
+
+	    return fechaProxima;
+	}
 	
 	public List<Viaje> filtrarViajesPorBuque(String nombreBuque) {
         return viajes.stream()
@@ -64,8 +90,5 @@ public class LineaNaviera {
                 .collect(Collectors.toList());
     }
 
-	public List<CircuitoMaritimo> getCircuitos(){
-		return this.circuitos;
-	}
 
 }

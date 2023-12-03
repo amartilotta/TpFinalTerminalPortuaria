@@ -3,8 +3,9 @@ package tpFinalTerminalPortuaria.Filtros;
 import java.util.List;
 
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
 
 public interface IFiltroDeBusqueda {
-	public List<CircuitoMaritimo> filtrar(List<CircuitoMaritimo> circuitos);
+	public List<Viaje> filtrar(List<Viaje> viajes);
 
 }

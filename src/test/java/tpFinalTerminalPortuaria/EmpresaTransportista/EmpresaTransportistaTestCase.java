@@ -9,9 +9,6 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
-import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
-import tpFinalTerminalPortuaria.EmpresaTransportista.EmpresaTransportista;
 
 public class EmpresaTransportistaTestCase {
 	private Camion camion;
@@ -54,6 +51,12 @@ public class EmpresaTransportistaTestCase {
 	public void agregoUnChoferYVerificoQueLaEmpresaTieneRegistradoSoloUnChofer() {
 		empresa.agregarChofer(chofer);
 		assertEquals(empresa.getChoferes().size(), 1);
+	}
+	
+	@Test
+	public void cambioNombreA_ForkYVerificoQueLaModificacionFueExitosa() {
+		empresa.setNombre("Fork");
+		assertEquals(empresa.getNombre(),"Fork");
 	}
 	
 	

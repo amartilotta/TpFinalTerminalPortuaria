@@ -38,6 +38,13 @@ public class CircuitoMaritimo {
         return tramos.stream()
                 .anyMatch(tramo -> tramo.getTerminalOrigen().equals(terminal) || tramo.getTerminalDestino().equals(terminal));
     }
+	
+	public boolean contieneTerminales(TerminalGestionada terminalGestionada, Terminal terminal) {
+	    List<Terminal> terminales = getTerminales();
+
+	    return terminales.contains(terminalGestionada) && terminales.contains(terminal);
+	}
+
 
 	public List<Terminal> getTerminales() {
         List<Terminal> terminales = new ArrayList<>();
@@ -54,26 +61,54 @@ public class CircuitoMaritimo {
     }
 	
 	
-	public long tiempoDesdeTerminalHastaTerminal(TerminalGestionada terminalGestionada, Terminal terminal) {
-		long tiempoTotal = 0;
-		
-		// Iterar sobre los tramos
-		Iterator<Tramo> iterator = tramos.iterator();
-		while (iterator.hasNext()) {
-			Tramo tramo = iterator.next();
-			
-			// Verificar si la terminal de origen del tramo coincide con la terminalGestionada
-			if (tramo.getTerminalOrigen().equals(terminalGestionada)) {
-				// Sumo el tiempo del tramo que estoy iterando
-				tiempoTotal += tramo.getDuracionEnDias();
-				
-				// la terminal que estoy iterando es la que me pasan por parametro?
-				if (tramo.getTerminalDestino().equals(terminal)) {
-					break; // Salgo del bucle 
-				}
-			}
-		}
-		
-		return tiempoTotal;
+//	4. Devolver cuánto tarda una naviera en llegar desde la terminal gestionada hacia otra
+//	terminal, independientemente de las fechas de los viajes programados.
+	public long tiempoDesdeTerminalHastaTerminal(Terminal terminalOrigen, Terminal terminalDestino) {
+	    long tiempoTotal = 0;
+	    boolean iniciado = false;
+
+	    for (Tramo tramo : tramos) {
+	        if (tramo.getTerminalOrigen().equals(terminalOrigen)) {
+	            iniciado = true;
+	            tiempoTotal += tramo.getDuracionEnDias();
+	        }
+
+	        if (iniciado) {
+	            tiempoTotal += tramo.getDuracionEnDias();
+	        }
+
+	        if (tramo.getTerminalDestino().equals(terminalDestino)) {
+	            return tiempoTotal; // Salir del bucle si llegamos a la terminal de destino
+	        }
+	    }
+
+	    // Si no se encontró la terminal de destino después de la terminal de origen
+	    return -1;
 	}
+	
+	
+//	public long tiempoDesdeTerminalHastaTerminal(TerminalGestionada terminalGestionada, Terminal terminal) {
+//		long tiempoTotal = 0;
+//		
+//		// Iterar sobre los tramos
+//		Iterator<Tramo> iterator = tramos.iterator();
+//		while (iterator.hasNext()) {
+//			Tramo tramo = iterator.next();
+//			
+//			// Verificar si la terminal de origen del tramo coincide con la terminalGestionada
+//			if (tramo.getTerminalOrigen().equals(terminalGestionada)) {
+//				// Sumo el tiempo del tramo que estoy iterando
+//				tiempoTotal += tramo.getDuracionEnDias();
+//				
+//				// la terminal que estoy iterando es la que me pasan por parametro?
+//				if (tramo.getTerminalDestino().equals(terminal)) {
+//					break; // Salgo del bucle 
+//				}
+//			}
+//		}
+//		
+//		return tiempoTotal;
+//	}
+	
+	
 }

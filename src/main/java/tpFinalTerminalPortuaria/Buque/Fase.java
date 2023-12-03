@@ -13,4 +13,6 @@ public abstract class Fase {
 	}
 	
 	public abstract void actualizar(TerminalGestionada terminal);
+	public abstract void depart(TerminalGestionada terminal);
+	public abstract void iniciarTrabajo(TerminalGestionada terminal);
 }

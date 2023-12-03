@@ -76,7 +76,7 @@ public abstract class Orden {
 	}
 	
 	public Double precioTotalServicios() {
-		return this.servicios.stream().mapToDouble(s -> s.precioFinal(this.getContainer())).sum();
+		return this.servicios.stream().mapToDouble(s -> s.precioFinal()).sum();
 	}
 }
 

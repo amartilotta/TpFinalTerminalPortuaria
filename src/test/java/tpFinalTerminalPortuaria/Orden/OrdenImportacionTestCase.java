@@ -16,6 +16,7 @@ import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
 import tpFinalTerminalPortuaria.Persona.Consignee;
+import tpFinalTerminalPortuaria.Persona.Shipper;
 import tpFinalTerminalPortuaria.Servicios.Servicio;
 import tpFinalTerminalPortuaria.Servicios.ServicioPesaje;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
@@ -39,7 +40,7 @@ public class OrdenImportacionTestCase {
 		servicios = new ArrayList<Servicio>();
 		servicioPesaje = mock(ServicioPesaje.class);
 		orden	  = new OrdenImportacion(viaje, container, chofer, camion, servicios, cliente);
-	}
+	} 
 
 	@Test
 	public void cuandoSeCreaUnaOrdenTiene_Viaje_Cliente_chofer_camion_servicios_orden() {
@@ -48,6 +49,13 @@ public class OrdenImportacionTestCase {
 		assertEquals(orden.getCliente(), cliente);
 		assertEquals(orden.getServicios(), servicios);
 		assertEquals(orden.getViaje(), viaje);
+	}
+	
+	@Test
+	public void cambioClienteA_OtroClienteYVerificoQueLaModificacionFueExitosa() {
+		Consignee otroCliente = mock(Consignee.class);
+		orden.setCliente(otroCliente);
+		assertEquals(orden.getCliente(),otroCliente);
 	}
 	
 	@Test
@@ -82,7 +90,7 @@ public class OrdenImportacionTestCase {
 	@Test
 	public void agregoServicioDePesajeConUnValorDe90ALaOrden_Y_VerificoQueElPrecioTotalDeServiciosEs90d() {
 		orden.agregarServicio(servicioPesaje);
-		when(servicioPesaje.precioFinal(container)).thenReturn(90d);
+		when(servicioPesaje.precioFinal()).thenReturn(90d);
 		assertTrue(orden.precioTotalServicios() == 90d);
 	}
 }

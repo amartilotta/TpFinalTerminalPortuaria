@@ -5,7 +5,7 @@ import tpFinalTerminalPortuaria.Buque.Buque;
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
 import tpFinalTerminalPortuaria.Tramo.Tramo;
 import tpFinalTerminalPortuaria.terminal.Terminal;
-import tpFinalTerminalPortuaria.Cronograma.Cronograma;
+import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 import java.util.*;
 
 
@@ -74,14 +74,42 @@ public class Viaje {
 	    return cronograma.containsKey(terminal);
 	}
 	
-	public Map.Entry<Terminal, LocalDate> obtenerEntradaCronograma(Terminal terminal) {
-        for (Map.Entry<Terminal, LocalDate> entry : cronograma.entrySet()) {
-            if (entry.getKey().equals(terminal)) {
-                return entry;
-            }
-        }
-        return null;
-    }
+	public LocalDate obtenerFechaSalidaDeTerminal(Terminal terminal) {
+	    for (Map.Entry<Terminal, LocalDate> entry : cronograma.entrySet()) {
+	        if (entry.getKey().equals(terminal)) {
+	            return entry.getValue();
+	        }
+	    }
+	    return null;
+	}
+	
+	
+//	5. Devolver la próxima fecha de partida de un buque desde la terminal gestionada
+//	hasta otra terminal de destino.(metodo auxiliar, principal esta en LineaNaviera)
+	public LocalDate calcularFechaProxima(TerminalGestionada terminalGestionada, Terminal puertoDestino, LocalDate fechaActual) {
+	    LocalDate fechaProxima = getFechaSalida();
+	    boolean iniciado = false;
+
+	    for (Tramo tramo : circuito.getTramos()) {
+	        if (tramo.getTerminalOrigen().equals(terminalGestionada)) {
+	            iniciado = true;
+	            fechaProxima = fechaProxima.plusDays(tramo.getDuracionEnDias());
+
+	            if (tramo.getTerminalDestino().equals(puertoDestino) && fechaProxima.isAfter(fechaActual)) {
+	                return fechaProxima;
+	            }
+	        }
+
+	        if (iniciado) {
+	            fechaProxima = fechaProxima.plusDays(tramo.getDuracionEnDias());
+
+	            if (tramo.getTerminalDestino().equals(puertoDestino) && fechaProxima.isAfter(fechaActual)) {
+	                return fechaProxima;
+	            }
+	        }
+	    }
+	    return null;
+	}
 	
 
 }

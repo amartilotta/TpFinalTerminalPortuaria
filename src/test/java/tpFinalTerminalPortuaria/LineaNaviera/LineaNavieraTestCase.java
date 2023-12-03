@@ -36,17 +36,19 @@ public class LineaNavieraTestCase {
     	circuito1 = mock(CircuitoMaritimo.class);
     	buques.add(buque1);
     	buques.add(buque2);
+
+
+
+
     	
         
-        
-        List<CircuitoMaritimo> circuitos = new ArrayList<>();
+
+       List<CircuitoMaritimo> circuitos = new ArrayList<>();
         // Agrega buques y circuitos según sea necesario
         // ...
 
-        
-        
 
-        lineaNaviera = new LineaNaviera("MiLineaNaviera", buques, circuitos);
+       lineaNaviera = new LineaNaviera("MiLineaNaviera", buques, circuitos);
     }
 
     @Test
@@ -66,7 +68,7 @@ public class LineaNavieraTestCase {
 
         assertEquals(0, lineaNaviera.getViajes().size());
     }
-    
+
     @Test
     public void testGetCircuitos() {
 
@@ -78,14 +80,14 @@ public class LineaNavieraTestCase {
 
         assertEquals(null, lineaNaviera.proximaFechaPartidaDeBuqueEnTerminal(buque1, terminalgestionada));
     }
-    
+
     @Test
     public void cantidadDeViajesEs1() {
     	lineaNaviera.crearViaje(buque1, circuito1, LocalDate.now());
 
         assertEquals(1, lineaNaviera.getViajes().size());
     }
-    
+
     @Test
     public void filtrarViajes() {
 

@@ -5,8 +5,8 @@ public class ServicioHigiene extends Servicio{
 
 	private Double precioPorMinimoVol ;
 	
-	public ServicioHigiene(Double precio, Double precioPorMinimoVolumen) {
-		super(precio);
+	public ServicioHigiene(Double precio, Double precioPorMinimoVolumen, Container container) {
+		super(precio, container);
 		this.precioPorMinimoVol = precioPorMinimoVolumen;
 	}
 
@@ -21,10 +21,10 @@ public class ServicioHigiene extends Servicio{
 	}
 	
 	@Override
-	public Double precioFinal(Container container) {
+	public Double precioFinal() {
 		Double precioFinal = 0d;
 		
-		if(container.volumen() < 70) {
+		if(this.getContainer().volumen() < 70) {
 			precioFinal = this.getPrecioPorMinimoVol();
 		}else {
 			precioFinal = this.getPrecioFijo();//PRECIO POR VOLUMEN > 70 METROS CUBICOS

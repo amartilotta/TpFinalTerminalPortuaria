@@ -1,6 +1,7 @@
 package tpFinalTerminalPortuaria.Orden;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -52,6 +53,13 @@ public class OrdenExportacionTestCase {
 	}
 	
 	@Test
+	public void cambioCLienteA_OtroClienteYVerificoQueLaModificacionFueExitosa() {
+		Shipper otroCliente = mock(Shipper.class);
+		orden.setCliente(otroCliente);
+		assertEquals(orden.getCliente(),otroCliente);
+	}
+	
+	@Test
 	public void cuandoSeCreaUnaOrdenNoTieneServiciosCargados() {
 		assertEquals(orden.getServicios().size(), 0);
 	}
@@ -71,9 +79,43 @@ public class OrdenExportacionTestCase {
 	public void agregoServicioDeHigieneConUnValorDe90ALaOrden_Y_VerificoQueElPrecioTotalDeServiciosEs90d() {
 		when(container.volumen()).thenReturn(50d);
 		when(servicioHigiene.getPrecioPorMinimoVol()).thenReturn(90d);
-		when(servicioHigiene.precioFinal(container)).thenReturn(90d);
+		when(servicioHigiene.precioFinal()).thenReturn(90d);
 		orden.agregarServicio(servicioHigiene);
 		assertTrue(orden.precioTotalServicios() == 90d);
+	}
+	
+	@Test
+	public void cambioViajeA_OtroViajeYVerificoQueLaModificacionFueExitosa() {
+		Viaje otroViaje = mock(Viaje.class);
+		orden.setViaje(otroViaje);
+		assertEquals(orden.getViaje(),otroViaje);
+	}
+	
+	@Test
+	public void cambioContainerA_OtroContainerYVerificoQueLaModificacionFueExitosa() {
+		Container otroContainer = mock(Container.class);
+		orden.setContainer(otroContainer);
+		assertEquals(orden.getContainer(),otroContainer);
+	}
+	
+	@Test
+	public void cambioChoferA_OtroChoferYVerificoQueLaModificacionFueExitosa() {
+		Chofer otroChofer = mock(Chofer.class);
+		orden.setChofer(otroChofer);
+		assertEquals(orden.getChofer(),otroChofer);
+	}
+	
+	@Test
+	public void cambioCamionA_OtroCamionYVerificoQueLaModificacionFueExitosa() {
+		Camion otroCamion = mock(Camion.class);
+		orden.setCamion(otroCamion);
+		assertEquals(orden.getCamion(),otroCamion);
+	}
+	
+	@Test
+	public void cambioElEstadoDeEstaPendienteA_FalsoYVerificoQueLaModificacionFueExitosa() {
+		orden.setEstaPendiente(false);
+		assertFalse(orden.estaPendiente());
 	}
 	
 
