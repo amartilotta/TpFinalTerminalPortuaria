@@ -1,20 +1,24 @@
 package tpFinalTerminalPortuaria.terminal;
 
-import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
-import tpFinalTerminalPortuaria.Viaje.Viaje;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Container.Container;
+import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
+import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
 import tpFinalTerminalPortuaria.EmpresaTransportista.EmpresaTransportista;
 import tpFinalTerminalPortuaria.Filtros.IFiltroDeBusqueda;
 import tpFinalTerminalPortuaria.ICriterio.ICriterio;
 import tpFinalTerminalPortuaria.ICriterio.MenorCantidadTerminalesOrigenDestino;
 import tpFinalTerminalPortuaria.Orden.OrdenExportacion;
 import tpFinalTerminalPortuaria.Orden.OrdenImportacion;
-import tpFinalTerminalPortuaria.Persona.Shipper;
 import tpFinalTerminalPortuaria.Persona.Consignee;
+import tpFinalTerminalPortuaria.Persona.Shipper;
+import tpFinalTerminalPortuaria.Servicios.Servicio;
+import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
 
 
 
@@ -105,11 +109,11 @@ public class TerminalGestionada extends Terminal {
 	}
 	
 	public void procesarOrdenExportacionDeBuque(String nombreBuque) {
-		List<OrdenImportacion> ordenesFiltradas = this.getOrdenesImportacion()
+		List<OrdenExportacion> ordenesFiltradas = this.getOrdenesExportacion()
                 .stream()
                 .filter(orden -> orden.getNombreBuque().equals(nombreBuque))
                 .collect(Collectors.toList());
-		for (OrdenImportacion orden : ordenesFiltradas) {
+		for (OrdenExportacion orden : ordenesFiltradas) {
 			String emailConsignee = orden.getEmailCliente();
 			this.mailer.enviarMail(emailConsignee, "Buque partiendo");
 		}
@@ -127,6 +131,48 @@ public class TerminalGestionada extends Terminal {
 	public List<Viaje> filtrar(IFiltroDeBusqueda filtro){
 		return filtro.filtrar(this.obtenerTodosLosViajes());
 	}
+	
+	public void generarOrdenImportacion(Consignee consignee, Camion camion, Chofer chofer, List<Servicio> servicios, Viaje viaje, Container container ){
+        if(this.esChoferAutorizado(chofer) && this.esCamionAutorizado(camion) &&
+            this.esClienteConsignee(consignee) && this.existeViajeDeLineasNavieras(viaje)){
+
+            OrdenImportacion orden = new OrdenImportacion(viaje, container, chofer, camion, servicios, consignee);
+            this.registrarOrdenImportacion(orden);
+
+        }
+    }
+
+    public Boolean esChoferAutorizado(Chofer chofer) {
+        return this.getEmpresasTransportistas().stream().anyMatch(
+                empresa -> empresa.esChoferAutorizado(chofer));
+    }
+
+    public Boolean esCamionAutorizado(Camion camion) {
+        return this.getEmpresasTransportistas().stream().anyMatch(
+                empresa -> empresa.esCamionAutorizado(camion));
+    }
+
+    public Boolean esClienteConsignee(Consignee consignee) {
+        return this.getConsignees().contains(consignee);
+    }
+
+    public Boolean existeViajeDeLineasNavieras(Viaje viaje) {
+        return this.getLineasNavieras().stream().anyMatch(
+                lineaNaviera -> lineaNaviera.existeViaje(viaje));
+    } 
+    public Boolean esClienteShipper(Shipper shipper) {
+        return this.getShippers().contains(shipper);
+    }
+    
+    public void generarOrdenExportacion(Shipper shipper, Camion camion, Chofer chofer, List<Servicio> servicios, Viaje viaje, Container container ){
+        if(this.esChoferAutorizado(chofer) && this.esCamionAutorizado(camion) &&
+            this.esClienteShipper(shipper) && this.existeViajeDeLineasNavieras(viaje)){
+
+            OrdenExportacion orden = new OrdenExportacion(viaje, container, chofer, camion, servicios, shipper);
+            this.registrarOrdenExportacion(orden);
+
+        }
+    }
 	
 
 

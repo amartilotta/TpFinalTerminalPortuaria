@@ -134,5 +134,16 @@ public class LineaNavieraTestCase {
 
         assertTrue(lineaNaviera.getCircuitos().contains(nuevoCircuito));
     }
+    
+    @Test
+    public void testExisteViaje() {
+        Viaje viaje = mock(Viaje.class);
+
+        lineaNaviera.getViajes().add(viaje);
+
+        assertTrue(lineaNaviera.existeViaje(viaje));
+    }
+    
+    
 
 }
