@@ -1,5 +1,6 @@
 package tpFinalTerminalPortuaria.Servicios;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tpFinalTerminalPortuaria.Container.Container;
+import tpFinalTerminalPortuaria.Container.ContainerReefer;
 
 public class ServicioHigieneTestCase {
 	private ServicioHigiene servicio;
@@ -42,4 +44,11 @@ public class ServicioHigieneTestCase {
 		when(container.volumen()).thenReturn(60d);
 		assertTrue(servicio.precioFinal() == 100d);
 	} 
+	
+	@Test
+	public void cambioElValorDeContainer_Y_VerificoElCambio() {
+		ContainerReefer otroContainer = mock(ContainerReefer.class);
+		servicio.setContainer(otroContainer);
+		assertEquals(servicio.getContainer(), otroContainer);
+	}
 }

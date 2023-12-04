@@ -67,8 +67,8 @@ public class BuqueTestCase {
 	
 	@Test 
 	public void verificoQueElBuqueSeEncuentraALaMismaDistanciaDeTerminal() {
-		when(terminal.getUbicacion()).thenReturn(buque.ubicacionActual());
-		assertTrue(buque.distanciaA(terminal)== 0);
+		when(terminal.getUbicacion()).thenReturn(buque.getUbicacion());
+		assertTrue(buque.distanciaA(terminal.getUbicacion())== 0);
 	}
 	
 	@Test

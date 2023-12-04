@@ -1,6 +1,5 @@
 package tpFinalTerminalPortuaria.Tramo;
 
-import java.time.LocalDate;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class Tramo implements Comparable<Tramo>{

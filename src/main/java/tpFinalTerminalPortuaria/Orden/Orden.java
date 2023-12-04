@@ -78,6 +78,10 @@ public abstract class Orden {
 	public Double precioTotalServicios() {
 		return this.servicios.stream().mapToDouble(s -> s.precioFinal()).sum();
 	}
+	
+	public String getNombreBuque() {
+		return this.getViaje().getNombreBuque();
+	}
 }
 
 

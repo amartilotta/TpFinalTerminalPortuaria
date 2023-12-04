@@ -31,11 +31,12 @@ public class TramoTestCase {
 
 
 
+
 	@Test
 	public void getTerminalOrigen() {
 		assertEquals(terminal, tramo.getTerminalOrigen());
 	}
-
+  
 	@Test
 	public void getTerminalDestino() {
 		assertEquals(terminal1, tramo.getTerminalDestino());
@@ -57,4 +58,6 @@ public class TramoTestCase {
 		assertEquals(1, tramo.compareTo(otroTramo));
 	}
 
+
 }
+
