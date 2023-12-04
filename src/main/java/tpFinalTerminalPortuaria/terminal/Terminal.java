@@ -33,6 +33,10 @@ public abstract class Terminal {
         }
     }
 	
+	public List<LineaNaviera> getLineasNavieras(){
+		return  this.lineasNavieras;
+	}
+	
 	public List<CircuitoMaritimo> obtenerCircuitos() {
 	    List<CircuitoMaritimo> circuitos = new ArrayList<>();
 	    for (LineaNaviera lineaNaviera : this.obtenerLineasNavieras()) {
