@@ -4,13 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FiltroFechaSalidaIgualQue extends FiltroFecha{
-	private LocalDate fecha;
-	private Terminal terminal;
 	
 	public FiltroFechaSalidaIgualQue(LocalDate fecha, Terminal terminal) {
 		super(fecha, terminal);

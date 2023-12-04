@@ -8,8 +8,6 @@ import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FiltroFechaLlegadaMayorQue extends FiltroFecha{
-	private LocalDate fecha;
-	private Terminal terminal;
 	
 	public FiltroFechaLlegadaMayorQue(LocalDate fecha, Terminal terminal) {
 		super(fecha, terminal);
