@@ -4,7 +4,6 @@ import java.util.List;
 
 import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
-import tpFinalTerminalPortuaria.terminal.Terminal;
 import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 
 public class Buque {
@@ -28,10 +27,15 @@ public class Buque {
 		this.fase = fase;
 	}
 	
-	public Ubicacion ubicacionActual() {
+	public void actualizarUbicacionPorGps(Ubicacion ubicacionEnviadaPorGps) { 
+		this.ubicacion = ubicacionEnviadaPorGps;//ubicacion.actualizarUbicacion();
 		
-		return this.ubicacion;//ubicacion.actualizarUbicacion();
 	}
+	
+	public Ubicacion getUbicacion() {
+		return this.ubicacion;
+	}
+	
 	
 	public void agregarContainer(Container container) {
 		this.containeres.add(container);
@@ -69,9 +73,9 @@ public class Buque {
 		this.getFase().depart(terminal);
 	}
 
-	public Double distanciaA(Terminal terminal) {
-		Ubicacion ubicacionActual = this.ubicacionActual();
-		Double distancia = ubicacionActual.calcularDistancia(terminal.getUbicacion());
+	public Double distanciaA(Ubicacion ubicacionTerminal) {
+		Ubicacion ubicacionActual = this.getUbicacion();
+		Double distancia = ubicacionActual.calcularDistancia(ubicacionTerminal);
 		return distancia;
 	}
 	 

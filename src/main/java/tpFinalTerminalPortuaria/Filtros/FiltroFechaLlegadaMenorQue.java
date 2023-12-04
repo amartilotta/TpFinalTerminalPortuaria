@@ -8,8 +8,6 @@ import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FiltroFechaLlegadaMenorQue extends FiltroFecha{
-	private LocalDate fecha;
-	private Terminal terminal;
 	
 	public FiltroFechaLlegadaMenorQue(LocalDate fecha, Terminal terminal) {
 		super(fecha, terminal);

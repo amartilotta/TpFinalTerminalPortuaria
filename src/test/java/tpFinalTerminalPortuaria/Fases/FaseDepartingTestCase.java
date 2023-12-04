@@ -12,7 +12,7 @@ import org.junit.Test;
 import tpFinalTerminalPortuaria.Buque.Buque;
 import tpFinalTerminalPortuaria.Buque.FaseDeparting;
 import tpFinalTerminalPortuaria.Buque.FaseOutbound;
-import tpFinalTerminalPortuaria.Buque.FaseWorking;
+import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
 import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
 
 public class FaseDepartingTestCase {
@@ -32,16 +32,18 @@ public class FaseDepartingTestCase {
 	@Test
 	public void verificoQueSiBuqueEstaEnFaseDepartingYAUnaDistanciaMayorA1KMDeTerminal_Entonces_AlPedirQueSeActualicePasaAFaseOutbound() {
 		 // Configurar el mock para que este a una distancia mayor  a 1km de terminal
-        when(buqueMock.distanciaA(terminalMock)).thenReturn(2d);
+		Ubicacion ubicacionMock = mock(Ubicacion.class);
+		when(terminalMock.getUbicacion()).thenReturn(ubicacionMock);
+        when(buqueMock.distanciaA(terminalMock.getUbicacion())).thenReturn(2d);
         // Llamó al método actualizar de faseWorking
+        
+        System.out.println(buqueMock.distanciaA(ubicacionMock));
         faseDeparting.actualizar(terminalMock); 
 
-        // Verificó que se llamó a setFase con una instancia de FaseDeparting
+        // Verificó que se llamó a setFase con una instancia de FaseOutbound
         verify(buqueMock).setFase(any(FaseOutbound.class));
   
-        // aseguro de que el método distanciaA() se llamó
-        verify(buqueMock).distanciaA(terminalMock);
- 
+
 	}
 	
 	

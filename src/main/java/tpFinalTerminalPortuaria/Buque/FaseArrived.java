@@ -22,5 +22,4 @@ public class FaseArrived extends Fase{
 	public void iniciarTrabajo(TerminalGestionada terminal) {
 		this.actualizar(terminal);
 	}
-
 } 

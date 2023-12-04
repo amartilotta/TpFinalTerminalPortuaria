@@ -9,10 +9,9 @@ public class FaseOutbound extends Fase{
 	
 	@Override
 	public void actualizar(TerminalGestionada terminal) {
-		if(this.getBuque().distanciaA(terminal) < 50d) {
+		if(this.getBuque().distanciaA(terminal.getUbicacion()) < 50d) {
 			Fase faseNueva = new FaseInbound(this.getBuque());
 			this.getBuque().setFase(faseNueva);
-			terminal.procesarOrdenSegunBuque(this.getBuque());
 		}
 		
 	}
