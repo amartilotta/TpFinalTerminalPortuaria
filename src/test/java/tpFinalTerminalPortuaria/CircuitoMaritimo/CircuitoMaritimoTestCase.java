@@ -12,7 +12,10 @@ import org.junit.*;
 
 import tpFinalTerminalPortuaria.Tramo.Tramo;
 import tpFinalTerminalPortuaria.terminal.Terminal;
+
 import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
+
+
 
 
 
@@ -25,6 +28,7 @@ public class CircuitoMaritimoTestCase {
 	private Terminal terminal;
 	private Terminal terminal1;
 	private Terminal terminal2;
+
 	private TerminalGestionada terminalGestionada;
 
 	@Before
@@ -35,6 +39,7 @@ public class CircuitoMaritimoTestCase {
 		terminal = mock(Terminal.class);
 		terminal1 = mock(Terminal.class);
 		terminal2 = mock(Terminal.class);
+
 		terminalGestionada = mock(TerminalGestionada.class);
 
 		tramosDelCircuito.add(tramo1);
@@ -49,6 +54,7 @@ public class CircuitoMaritimoTestCase {
 		assertEquals(tramosDelCircuito, circuito.getTramos());
 	}
 
+
 	@Test
 	public void getTerminales() {
 		when(tramo1.getTerminalOrigen()).thenReturn(terminal);
@@ -60,6 +66,7 @@ public class CircuitoMaritimoTestCase {
 
         
 		assertEquals(2, circuito.getTerminales().size());
+
 	}
 
 	@Test
@@ -89,6 +96,7 @@ public class CircuitoMaritimoTestCase {
 		assertEquals(null, circuito.getPuertoOrigen());
 	}
 
+
 	@Test 
 	public void getPuertoOrigenIsTerminal() {
 
@@ -105,6 +113,7 @@ public class CircuitoMaritimoTestCase {
 
 		assertEquals(5, circuito.calcularTiempoTotal());
 	}
+
 
 	@Test 
 	public void calcularPrecioTotalEs1000() {
@@ -141,3 +150,4 @@ public class CircuitoMaritimoTestCase {
 	}
 
 }
+
