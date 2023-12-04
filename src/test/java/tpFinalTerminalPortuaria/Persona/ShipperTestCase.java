@@ -9,7 +9,7 @@ public class ShipperTestCase {
 	
 	@Before
 	public void setUp() throws Exception {
-		shipper = new Shipper("MATIAS", "SOSA", "1234");
+		shipper = new Shipper("MATIAS", "SOSA", "1234", "email@yahoo.com");
 	}
 
 	@Test
@@ -38,6 +38,13 @@ public class ShipperTestCase {
 		assertEquals(shipper.getDNI(), "1234");
 		shipper.setDNI("4321");
 		assertEquals(shipper.getDNI(), "4321");
+	}
+	
+	@Test
+	public void verificoQueElCambioDeEmailFunciona() {
+		assertEquals(shipper.getEmail(), "email@yahoo.com");
+		shipper.setEmail("email2@yahoo.com");
+		assertEquals(shipper.getEmail(), "email2@yahoo.com");
 	}
 	
 
