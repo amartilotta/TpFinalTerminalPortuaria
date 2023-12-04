@@ -93,6 +93,15 @@ public class OrdenImportacionTestCase {
 		when(servicioPesaje.precioFinal()).thenReturn(90d);
 		assertTrue(orden.precioTotalServicios() == 90d);
 	}
+	
+	@Test
+    public void testGetEmailCliente() {
+        when(cliente.getEmail()).thenReturn("cliente@example.com");
+
+        String emailCliente = orden.getEmailCliente();
+
+        assertEquals("cliente@example.com", emailCliente);
+    }
 }
 
 
