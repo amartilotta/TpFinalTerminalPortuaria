@@ -115,6 +115,13 @@ public class ViajeTestCase {
 
         assertEquals(circuito, viaje.getCircuito());
     }
+    
+    @Test
+    public void testGetNombreBuque() {
+    	when(buque.getNombre()).thenReturn("Buque");
+
+        assertEquals("Buque", viaje.getNombreBuque());
+    }
 
     @Test
     public void testGetCronograma() {
@@ -183,6 +190,25 @@ public class ViajeTestCase {
         assertNull(fechaProxima); // La fecha de salida más 5 días del tramo
     
     }
+    
+    @Test
+    public void testFechaAsignadaA() {
+        // Crear instancias necesarias para el test
+        Terminal terminal = mock(Terminal.class);
+        LocalDate fechaAsignada = LocalDate.now();
+        Map<Terminal, LocalDate> cronograma = new HashMap<>();
+
+        // Configurar el comportamiento del viaje mock
+        
+        cronograma.put(terminal, fechaAsignada);
+
+        // Llama al método a probar
+        LocalDate fechaObtenida = viaje.fechaAsignadaA(terminal);
+
+        // Verifica que la fecha obtenida sea la esperada
+        assertEquals(null, fechaObtenida);
+
+        }
 //    @Test
 //    public void testObtenerEntradaCronogramaExistente() {
 //        // Cuando se llama a obtenerEntradaCronograma con terminal1, debería devolver la entrada correspondiente
