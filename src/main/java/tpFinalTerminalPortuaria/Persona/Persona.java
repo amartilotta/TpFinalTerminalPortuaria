@@ -4,11 +4,13 @@ public abstract class Persona {
 	private String nombre;
 	private String apellido;
 	private String dni;
+	private String email;
 	
-	public Persona(String nombre, String apellido, String dni) {
+	public Persona(String nombre, String apellido, String dni, String email) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
+		this.email = email;
 	}
 	
 	//SETTER:
@@ -21,6 +23,9 @@ public abstract class Persona {
 	public void setDNI(String dni) {
 		this.dni = dni;
 	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	//GETTER:
 	public String getNombre() {
@@ -31,5 +36,8 @@ public abstract class Persona {
 	}
 	public String getDNI() {
 		return this.dni;
+	}
+	public String getEmail() {
+		return this.email;
 	}
 }

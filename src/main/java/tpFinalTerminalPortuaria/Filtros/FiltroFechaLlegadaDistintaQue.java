@@ -8,8 +8,7 @@ import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FiltroFechaLlegadaDistintaQue extends FiltroFecha{
-	private LocalDate fecha;
-	private Terminal terminal;
+
 	
 	public FiltroFechaLlegadaDistintaQue(LocalDate fecha, Terminal terminal) {
 		super(fecha, terminal);

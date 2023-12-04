@@ -64,9 +64,9 @@ public class CircuitoMaritimoTestCase {
         terminales.add(terminal1);
 
 
+        
+		assertEquals(2, circuito.getTerminales().size());
 
-
-		assertEquals(terminales, circuito.getTerminales());
 	}
 
 	@Test

@@ -99,17 +99,13 @@ public class ViajeTestCase {
 
     @Test
     public void testGetFechaSalida() {
-    	System.out.println("Fecha de salida configurada en setUp: " + fechaSalida);
-        System.out.println("Fecha de salida en el viaje: " + viaje.getFechaSalida());
-
-        // Comprueba que la fecha de salida coincide con el valor esperado
+    	
         assertEquals(fechaSalida, viaje.getFechaSalida());
     }
 
     @Test
     public void testGetBuque() {
    
-        // Comprueba que el buque coincide con el valor esperado
         assertEquals(buque, viaje.getBuque());
     }
 
@@ -117,7 +113,6 @@ public class ViajeTestCase {
     public void testGetCircuito() {
 
 
-        // Comprueba que el circuito coincide con el valor esperado
         assertEquals(circuito, viaje.getCircuito());
     }
 

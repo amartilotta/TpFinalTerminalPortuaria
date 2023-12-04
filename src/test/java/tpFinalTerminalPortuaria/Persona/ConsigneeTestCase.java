@@ -9,7 +9,7 @@ public class ConsigneeTestCase {
 	
 	@Before
 	public void setUp() throws Exception {
-		this.consignee = new Consignee("JUAN","GARCIA", "1234" );
+		this.consignee = new Consignee("JUAN","GARCIA", "1234", "email@yahoo.com");
 	}
 
 	@Test
@@ -38,6 +38,13 @@ public class ConsigneeTestCase {
 		assertEquals(consignee.getDNI(), "1234");
 		consignee.setDNI("4321");
 		assertEquals(consignee.getDNI(), "4321");
+	}
+	
+	@Test
+	public void verificoQueElCambioDeEmailFunciona() {
+		assertEquals(consignee.getEmail(), "email@yahoo.com");
+		consignee.setEmail("email2@yahoo.com");
+		assertEquals(consignee.getEmail(), "email2@yahoo.com");
 	}
 	
 
