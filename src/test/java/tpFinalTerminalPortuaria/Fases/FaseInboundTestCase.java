@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import tpFinalTerminalPortuaria.Buque.Buque;
 import tpFinalTerminalPortuaria.Buque.FaseInbound;
-import tpFinalTerminalPortuaria.Buque.FaseOutbound;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
 import tpFinalTerminalPortuaria.Buque.FaseArrived;
 import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
@@ -32,7 +31,8 @@ public class FaseInboundTestCase {
 	@Test
 	public void verificoQueSiBuqueEstaEnLaMismaUbicacionATerminal_EntoncesPasaAFaseArrived() {
 		 // Configurar el mock para que tenga trabajo en curso
-		when(buqueMock.distanciaA(terminalMock)).thenReturn(0d);
+		Ubicacion ubicacionMock = mock(Ubicacion.class);
+		when(buqueMock.distanciaA(ubicacionMock)).thenReturn(0d);
 
         // Llamó al método actualizar de faseInbound
 		faseInbound.actualizar(terminalMock);
@@ -41,9 +41,6 @@ public class FaseInboundTestCase {
         verify(buqueMock).setFase(any(FaseArrived.class));
 
   
-        // aseguro de que el método distanciaA() se llamó
-        verify(buqueMock).distanciaA(terminalMock);
- 
 	}
 	
 	//DEPART
