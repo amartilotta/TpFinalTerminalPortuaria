@@ -89,6 +89,10 @@ public class LineaNaviera {
                 .filter(viaje -> viaje.getBuque().getNombre().equals(nombreBuque))
                 .collect(Collectors.toList());
     }
+	
+	public boolean existeViaje(Viaje viaje) {
+	    return viajes.contains(viaje);
+	}
 
 
 }

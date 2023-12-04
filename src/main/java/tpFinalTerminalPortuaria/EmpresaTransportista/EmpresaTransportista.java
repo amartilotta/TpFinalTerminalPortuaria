@@ -39,6 +39,14 @@ public class EmpresaTransportista {
 		return this.choferes;
 	}
 	
+	public Boolean esChoferAutorizado(Chofer chofer) {
+        return this.choferes.contains(chofer);
+    }
+
+    public Boolean esCamionAutorizado(Camion camion) {
+        return this.camiones.contains(camion);
+    }
+	
 
 }
 

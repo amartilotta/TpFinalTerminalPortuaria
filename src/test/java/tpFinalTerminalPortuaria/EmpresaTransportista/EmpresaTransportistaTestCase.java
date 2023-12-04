@@ -1,6 +1,7 @@
 package tpFinalTerminalPortuaria.EmpresaTransportista;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,12 @@ public class EmpresaTransportistaTestCase {
 	}
 	
 	@Test
+	public void verificoElCambioDeNombre() {
+		empresa.setNombre("Maloso");
+		assertEquals(empresa.getNombre(),"Maloso");
+	}
+	
+	@Test
 	public void verificoQueLaEmpresaNoTieneCamionesRegistrados() {
 		assertEquals(empresa.getCamiones().size(), 0);
 	}
@@ -54,9 +61,15 @@ public class EmpresaTransportistaTestCase {
 	}
 	
 	@Test
-	public void cambioNombreA_ForkYVerificoQueLaModificacionFueExitosa() {
-		empresa.setNombre("Fork");
-		assertEquals(empresa.getNombre(),"Fork");
+	public void testEsChoferAutorizado() {
+		empresa.agregarChofer(chofer);
+		assertTrue(empresa.esChoferAutorizado(chofer));
+	}
+	
+	@Test
+	public void testEsCamionAutorizado() {
+		empresa.agregarCamion(camion);
+		assertTrue(empresa.esCamionAutorizado(camion));
 	}
 	
 	
