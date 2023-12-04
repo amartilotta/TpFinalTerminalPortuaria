@@ -97,6 +97,16 @@ public class BuqueTestCase {
 		buque.actualizarFase(terminal);
 		verify(faseArrived).actualizar(terminal); 
 	}
+	
+	@Test
+    public void testActualizarUbicacionPorGps() {
+
+        Ubicacion ubicacionNueva = new Ubicacion(10, 10);
+        buque.actualizarUbicacionPorGps(ubicacionNueva);
+
+        // Verificar que la ubicación se actualizó correctamente
+        assertEquals(ubicacionNueva, buque.getUbicacion());
+    }
 } 
 
  

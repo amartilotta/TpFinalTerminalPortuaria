@@ -118,6 +118,15 @@ public class OrdenExportacionTestCase {
 		assertFalse(orden.estaPendiente());
 	}
 	
+	@Test
+    public void testGetEmailCliente() {
+        when(cliente.getEmail()).thenReturn("cliente@example.com");
+
+        String emailCliente = orden.getEmailCliente();
+
+        assertEquals("cliente@example.com", emailCliente);
+    }
+	
 
 }
 

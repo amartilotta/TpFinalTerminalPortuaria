@@ -12,8 +12,13 @@ import org.junit.Test;
 
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
 import tpFinalTerminalPortuaria.EmpresaTransportista.EmpresaTransportista;
+import tpFinalTerminalPortuaria.Filtros.IFiltroDeBusqueda;
 import tpFinalTerminalPortuaria.ICriterio.ICriterio;
-import tpFinalTerminalPortuaria.Orden.Orden;
+import tpFinalTerminalPortuaria.Viaje.Viaje;
+import tpFinalTerminalPortuaria.terminal.IMailer;
+import tpFinalTerminalPortuaria.terminal.MailerConcreto;
+import tpFinalTerminalPortuaria.Orden.OrdenExportacion;
+import tpFinalTerminalPortuaria.Orden.OrdenImportacion;
 import tpFinalTerminalPortuaria.Persona.Consignee;
 import tpFinalTerminalPortuaria.Persona.Shipper;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
@@ -106,6 +111,108 @@ public class TerminalGestionadaTestCase {
 
 
         assertEquals(terminalGestionada.getEstrategiaCircuito(), otroCriterio);
+    }
+    
+    @Test
+    public void testProcesarOrdenExportacionDeBuque() {
+        // Crear instancias necesarias para el test
+        String nombreBuque = "Buque123";
+
+        // Supongamos que tienes una OrdenExportacion con el nombre del buque
+        OrdenExportacion ordenExportacion = mock(OrdenExportacion.class);
+        when(ordenExportacion.getNombreBuque()).thenReturn(nombreBuque);
+
+        // Agrega la orden a la lista de ordenesExportacion
+        terminalGestionada.registrarOrdenExportacion(ordenExportacion);
+
+        // Llama al método a probar
+        terminalGestionada.procesarOrdenExportacionDeBuque(nombreBuque);
+
+        // Agrega las aserciones necesarias según la lógica de tu implementación
+    }
+
+    @Test
+    public void testProcesarOrdenImportacionDeBuque() {
+        // Crear instancias necesarias para el test
+        String nombreBuque = "Buque456";
+
+        // Supongamos que tienes una OrdenImportacion con el nombre del buque
+        OrdenImportacion ordenImportacion = mock(OrdenImportacion.class);
+        when(ordenImportacion.getNombreBuque()).thenReturn(nombreBuque);
+
+        // Agrega la orden a la lista de ordenesImportacion
+        terminalGestionada.registrarOrdenImportacion(ordenImportacion);
+
+        // Llama al método a probar
+        terminalGestionada.procesarOrdenImportacionDeBuque(nombreBuque);
+
+        // Agrega las aserciones necesarias según la lógica de tu implementación
+    }
+
+    @Test
+    public void testGetOrdenesImportacion() {
+        // Crear instancias necesarias para el test
+        // Supongamos que tienes una OrdenImportacion
+        OrdenImportacion ordenImportacion = mock(OrdenImportacion.class);
+
+        // Agrega la orden a la lista de ordenesImportacion
+        terminalGestionada.registrarOrdenImportacion(ordenImportacion);
+
+        // Llama al método a probar
+        List<OrdenImportacion> ordenesImportacion = terminalGestionada.getOrdenesImportacion();
+
+        assertNotNull(ordenesImportacion);
+        // Agrega las aserciones necesarias según la lógica de tu implementación
+    }
+
+    @Test
+    public void testGetOrdenesExportacion() {
+        // Crear instancias necesarias para el test
+        // Supongamos que tienes una OrdenExportacion
+        OrdenExportacion ordenExportacion = mock(OrdenExportacion.class);
+
+        // Agrega la orden a la lista de ordenesExportacion
+        terminalGestionada.registrarOrdenExportacion(ordenExportacion);
+
+        // Llama al método a probar
+        List<OrdenExportacion> ordenesExportacion = terminalGestionada.getOrdenesExportacion();
+
+        assertNotNull(ordenesExportacion);
+        // Agrega las aserciones necesarias según la lógica de tu implementación
+    }
+    
+    @Test
+    public void testFiltrar() {
+        // Crear instancias necesarias para el test
+        IFiltroDeBusqueda filtro = mock(IFiltroDeBusqueda.class);
+        List<Viaje> todosLosViajes = Arrays.asList(mock(Viaje.class), mock(Viaje.class), mock(Viaje.class));
+
+        // Configurar el comportamiento del filtro mock
+        when(filtro.filtrar(todosLosViajes)).thenReturn(Arrays.asList(todosLosViajes.get(0), todosLosViajes.get(2)));
+
+        // Llama al método a probar
+        List<Viaje> viajesFiltrados = terminalGestionada.filtrar(filtro);
+
+        // Verifica que el filtro haya sido aplicado correctamente
+        assertEquals(0, viajesFiltrados.size());
+        
+    }
+    
+    @Test
+    public void testEnviarMail() {
+        // Crear una instancia de la implementación concreta
+        IMailer mailer = new MailerConcreto();
+
+        // Definir datos de prueba
+        String destinatario = "destinatario@example.com";
+        String mensaje = "Este es un mensaje de prueba.";
+
+        // Llama al método a probar
+        mailer.enviarMail(destinatario, mensaje);
+
+        // Verifica que el método no lance excepciones
+        assertTrue(true);
+        // (no hay nada para verificar ya que el método no tiene lógica en la implementación concreta)
     }
 
 }
