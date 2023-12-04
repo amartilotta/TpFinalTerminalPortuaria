@@ -11,6 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tpFinalTerminalPortuaria.CircuitoMaritimo.CircuitoMaritimo;
+import tpFinalTerminalPortuaria.Container.Container;
+import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
+import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
 import tpFinalTerminalPortuaria.EmpresaTransportista.EmpresaTransportista;
 import tpFinalTerminalPortuaria.Filtros.IFiltroDeBusqueda;
 import tpFinalTerminalPortuaria.ICriterio.ICriterio;
@@ -24,23 +27,42 @@ import tpFinalTerminalPortuaria.Persona.Shipper;
 import tpFinalTerminalPortuaria.Ubicacion.Ubicacion;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 import tpFinalTerminalPortuaria.terminal.TerminalGestionada;
+import tpFinalTerminalPortuaria.Servicios.Servicio;
+import tpFinalTerminalPortuaria.LineaNaviera.LineaNaviera;
 
 public class TerminalGestionadaTestCase {
 
 	private TerminalGestionada terminalGestionada;
     private Ubicacion ubicacion;
     private ICriterio estrategiaMock;
+    private Camion camion;
+    private Chofer chofer;
+    private Shipper shipper;
+    private EmpresaTransportista empresaTransportista;
+    private Viaje viaje;
+    private Container container;
+    private LineaNaviera naviera;
+    private Consignee consignee;
 
     @Before
     public void setUp() {
         ubicacion = mock(Ubicacion.class);
         estrategiaMock = mock(ICriterio.class);
         terminalGestionada = new TerminalGestionada(ubicacion, estrategiaMock);
+        camion = mock(Camion.class);
+        chofer = mock(Chofer.class);
+        shipper = mock(Shipper.class);
+        consignee = mock(Consignee.class);
+        empresaTransportista = mock(EmpresaTransportista.class);
+        viaje = mock(Viaje.class);
+        container = mock(Container.class);
+        naviera = mock(LineaNaviera.class);
+        terminalGestionada.agregarLineaNaviera(naviera);
+        terminalGestionada.agregarEmpresaTrasnportista(empresaTransportista);
     }
 
     @Test
     public void testCalcularMejorCircuito() {
-        // Crear instancias necesarias para el test
         Terminal terminalDestino = mock(Terminal.class);
         CircuitoMaritimo circuitoMaritimo = mock(CircuitoMaritimo.class);
         List<CircuitoMaritimo> circuitosDisponibles = Arrays.asList(circuitoMaritimo);
@@ -65,17 +87,6 @@ public class TerminalGestionadaTestCase {
         assertTrue(terminalGestionada.getEmpresasTransportistas().contains(empresaTransportista));
     }
 
-//    @Test
-//    public void testRegistrarOrden() {
-//
-//        Orden orden = mock(Orden.class);
-//
-//
-//        terminalGestionada.registrarOrden(orden);
-//
-//
-//        assertTrue(terminalGestionada.getOrdenes().contains(orden));
-//    }
 
     @Test
     public void testRegistrarShipper() {
@@ -115,104 +126,274 @@ public class TerminalGestionadaTestCase {
     
     @Test
     public void testProcesarOrdenExportacionDeBuque() {
-        // Crear instancias necesarias para el test
+
         String nombreBuque = "Buque123";
 
-        // Supongamos que tienes una OrdenExportacion con el nombre del buque
+
         OrdenExportacion ordenExportacion = mock(OrdenExportacion.class);
         when(ordenExportacion.getNombreBuque()).thenReturn(nombreBuque);
 
-        // Agrega la orden a la lista de ordenesExportacion
+
         terminalGestionada.registrarOrdenExportacion(ordenExportacion);
 
-        // Llama al método a probar
+
         terminalGestionada.procesarOrdenExportacionDeBuque(nombreBuque);
 
-        // Agrega las aserciones necesarias según la lógica de tu implementación
     }
 
     @Test
     public void testProcesarOrdenImportacionDeBuque() {
-        // Crear instancias necesarias para el test
+
         String nombreBuque = "Buque456";
 
-        // Supongamos que tienes una OrdenImportacion con el nombre del buque
         OrdenImportacion ordenImportacion = mock(OrdenImportacion.class);
         when(ordenImportacion.getNombreBuque()).thenReturn(nombreBuque);
 
-        // Agrega la orden a la lista de ordenesImportacion
         terminalGestionada.registrarOrdenImportacion(ordenImportacion);
 
-        // Llama al método a probar
+
         terminalGestionada.procesarOrdenImportacionDeBuque(nombreBuque);
 
-        // Agrega las aserciones necesarias según la lógica de tu implementación
+
     }
 
     @Test
     public void testGetOrdenesImportacion() {
-        // Crear instancias necesarias para el test
-        // Supongamos que tienes una OrdenImportacion
+
         OrdenImportacion ordenImportacion = mock(OrdenImportacion.class);
 
-        // Agrega la orden a la lista de ordenesImportacion
+
         terminalGestionada.registrarOrdenImportacion(ordenImportacion);
 
-        // Llama al método a probar
         List<OrdenImportacion> ordenesImportacion = terminalGestionada.getOrdenesImportacion();
 
         assertNotNull(ordenesImportacion);
-        // Agrega las aserciones necesarias según la lógica de tu implementación
+
     }
 
     @Test
     public void testGetOrdenesExportacion() {
-        // Crear instancias necesarias para el test
-        // Supongamos que tienes una OrdenExportacion
+
         OrdenExportacion ordenExportacion = mock(OrdenExportacion.class);
 
-        // Agrega la orden a la lista de ordenesExportacion
+
         terminalGestionada.registrarOrdenExportacion(ordenExportacion);
 
-        // Llama al método a probar
+
         List<OrdenExportacion> ordenesExportacion = terminalGestionada.getOrdenesExportacion();
 
         assertNotNull(ordenesExportacion);
-        // Agrega las aserciones necesarias según la lógica de tu implementación
+
     }
     
     @Test
     public void testFiltrar() {
-        // Crear instancias necesarias para el test
+
         IFiltroDeBusqueda filtro = mock(IFiltroDeBusqueda.class);
         List<Viaje> todosLosViajes = Arrays.asList(mock(Viaje.class), mock(Viaje.class), mock(Viaje.class));
 
-        // Configurar el comportamiento del filtro mock
+  
         when(filtro.filtrar(todosLosViajes)).thenReturn(Arrays.asList(todosLosViajes.get(0), todosLosViajes.get(2)));
 
-        // Llama al método a probar
+  
         List<Viaje> viajesFiltrados = terminalGestionada.filtrar(filtro);
 
-        // Verifica que el filtro haya sido aplicado correctamente
+   
         assertEquals(0, viajesFiltrados.size());
         
     }
     
     @Test
     public void testEnviarMail() {
-        // Crear una instancia de la implementación concreta
+   
         IMailer mailer = new MailerConcreto();
 
-        // Definir datos de prueba
+   
         String destinatario = "destinatario@example.com";
         String mensaje = "Este es un mensaje de prueba.";
 
-        // Llama al método a probar
+ 
         mailer.enviarMail(destinatario, mensaje);
 
-        // Verifica que el método no lance excepciones
+ 
         assertTrue(true);
-        // (no hay nada para verificar ya que el método no tiene lógica en la implementación concreta)
     }
+    
+    @Test
+    public void testGenerarOrdenImportacion() {
+    	List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(true);
+        terminalGestionada.registrarConsignee(consignee);
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(true);
+
+        terminalGestionada.generarOrdenImportacion(consignee, camion, chofer, servicios, viaje, container);
+    }
+    
+
+    @Test
+    public void testGenerarOrdenImportacionFallido() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(false);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(false);
+        terminalGestionada.registrarConsignee(consignee);
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenImportacion(consignee, camion, chofer, servicios, viaje, container);
+    }
+
+    @Test
+    public void testGenerarOrdenImportacionFallido2() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(false);
+        terminalGestionada.registrarConsignee(consignee);
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenImportacion(consignee, camion, chofer, servicios, viaje, container);
+    }
+
+    @Test
+    public void testGenerarOrdenImportacionFallido3() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(true);
+        
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenImportacion(consignee, camion, chofer, servicios, viaje, container);
+    }
+    
+    @Test
+    public void testGenerarOrdenImportacionFallido4() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(true);
+        terminalGestionada.registrarConsignee(consignee);
+        // No existe Viaje de Lineas Navieras
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenImportacion(consignee, camion, chofer, servicios, viaje, container);
+    }
+
+    @Test
+    public void testEsChoferAutorizado() {
+        terminalGestionada.agregarEmpresaTrasnportista(empresaTransportista);
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+
+        boolean autorizado = terminalGestionada.esChoferAutorizado(chofer);
+
+        assertTrue(autorizado);
+    }
+
+    @Test
+    public void testEsCamionAutorizado() {
+        terminalGestionada.agregarEmpresaTrasnportista(empresaTransportista);
+
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(true);
+
+        boolean autorizado = terminalGestionada.esCamionAutorizado(camion);
+
+        assertTrue(autorizado);
+    }
+
+    @Test
+    public void testEsClienteConsignee() {
+        Consignee consignee = mock(Consignee.class);
+
+        terminalGestionada.registrarConsignee(consignee);
+
+        boolean esCliente = terminalGestionada.esClienteConsignee(consignee);
+
+        assertTrue(esCliente);
+    }
+
+    @Test
+    public void testExisteViajeDeLineasNavieras() {
+        terminalGestionada.registrarOrdenImportacion(mock(OrdenImportacion.class));
+
+        when(naviera.existeViaje(viaje)).thenReturn(true);
+
+        boolean existeViaje = terminalGestionada.existeViajeDeLineasNavieras(viaje);
+
+        assertTrue(existeViaje);
+    }
+
+    @Test
+    public void testEsClienteShipper() {
+        terminalGestionada.registrarShipper(shipper);
+
+        boolean esCliente = terminalGestionada.esClienteShipper(shipper);
+
+        assertTrue(esCliente);
+    }
+
+    @Test
+    public void testGenerarOrdenExportacion() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(true);
+        terminalGestionada.registrarShipper(shipper);
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(true);
+
+        terminalGestionada.generarOrdenExportacion(shipper, camion, chofer, servicios, viaje, container);
+    }
+
+    @Test
+    public void testGenerarOrdenExportacionFallido() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(false);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(false);
+        terminalGestionada.registrarShipper(shipper);
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenExportacion(shipper, camion, chofer, servicios, viaje, container);
+    }
+
+    @Test
+    public void testGenerarOrdenExportacionFallido2() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(false);
+        terminalGestionada.registrarShipper(shipper);
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenExportacion(shipper, camion, chofer, servicios, viaje, container);
+    }
+
+    @Test
+    public void testGenerarOrdenExportacionFallido3() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(true);
+
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenExportacion(shipper, camion, chofer, servicios, viaje, container);
+    }
+    
+    @Test
+    public void testGenerarOrdenExportacionFallido4() {
+        List<Servicio> servicios = Arrays.asList(mock(Servicio.class));
+
+        when(empresaTransportista.esChoferAutorizado(chofer)).thenReturn(true);
+        when(empresaTransportista.esCamionAutorizado(camion)).thenReturn(true);
+        terminalGestionada.registrarShipper(shipper);
+        when(terminalGestionada.existeViajeDeLineasNavieras(viaje)).thenReturn(false);
+
+        terminalGestionada.generarOrdenExportacion(shipper, camion, chofer, servicios, viaje, container);
+    }
+    
+    
 
 }
