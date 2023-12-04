@@ -110,6 +110,17 @@ public class Viaje {
 	    }
 	    return null;
 	}
-	
+
+	public LocalDate fechaAsignadaA(Terminal terminal) {
+        LocalDate fecha = null;
+        if(this.tieneTerminal(terminal)) {
+            fecha = cronograma.get(terminal);
+        }
+        return fecha;
+    }
+
+	public String getNombreBuque() {
+		return this.buque.getNombre();
+	}
 
 }

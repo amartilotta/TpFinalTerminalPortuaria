@@ -8,8 +8,6 @@ import tpFinalTerminalPortuaria.Viaje.Viaje;
 import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public class FiltroFechaLlegadaIgualQue extends FiltroFecha{
-	private LocalDate fecha;
-	private Terminal terminal;
 	
 	public FiltroFechaLlegadaIgualQue(LocalDate fecha, Terminal terminal) {
 		super(fecha, terminal);

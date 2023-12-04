@@ -23,5 +23,9 @@ public class OrdenExportacion extends Orden{
 	public void setCliente(Shipper cliente) {
 		this.shipper = cliente;
 	}
+	
+	public String getEmailCliente() {
+		return this.shipper.getEmail();
+	}
 
 }

@@ -6,7 +6,7 @@ import tpFinalTerminalPortuaria.terminal.Terminal;
 
 public abstract class FiltroFecha extends FiltroSimple {
 	private LocalDate fecha;
-	private Terminal terminal;
+	protected Terminal terminal;
 	
 	public FiltroFecha(LocalDate fecha, Terminal terminal) {
 		this.fecha 		= fecha;

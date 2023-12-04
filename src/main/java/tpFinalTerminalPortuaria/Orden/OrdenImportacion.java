@@ -6,7 +6,6 @@ import tpFinalTerminalPortuaria.Container.Container;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Camion;
 import tpFinalTerminalPortuaria.EmpresaTransportista.Chofer;
 import tpFinalTerminalPortuaria.Persona.Consignee;
-import tpFinalTerminalPortuaria.Persona.Shipper;
 import tpFinalTerminalPortuaria.Servicios.Servicio;
 import tpFinalTerminalPortuaria.Viaje.Viaje;
 
@@ -24,6 +23,10 @@ public class OrdenImportacion extends Orden{
 	
 	public void setCliente(Consignee cliente) {
 		this.cliente = cliente;
+	}
+
+	public String getEmailCliente() {
+		return this.cliente.getEmail();
 	}
 	
 }
